@@ -15,6 +15,7 @@ from pathlib import Path
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+ROOT_DIR = BASE_DIR.parent
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
@@ -41,8 +42,10 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
 ]
 
+# local
 INSTALLED_APPS += [
-    "apps.accounts"
+    "apps.accounts",
+    "apps.developers"
 ]
 if DEBUG and DEBUG_TOOLBAR:
     INSTALLED_APPS += ["debug_toolbar"]
@@ -65,7 +68,7 @@ ROOT_URLCONF = "devsearch.urls"
 TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
-        "DIRS": [],
+        "DIRS": [os.path.join(ROOT_DIR, "templates")],
         "APP_DIRS": True,
         "OPTIONS": {
             "context_processors": [
