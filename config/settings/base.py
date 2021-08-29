@@ -43,10 +43,7 @@ INSTALLED_APPS = [
 ]
 
 # local
-INSTALLED_APPS += [
-    "apps.accounts",
-    "apps.developers"
-]
+INSTALLED_APPS += ["apps.accounts", "apps.developers"]
 if DEBUG and DEBUG_TOOLBAR:
     INSTALLED_APPS += ["debug_toolbar"]
     MIDDLEWARE = ["debug_toolbar.middleware.DebugToolbarMiddleware"]

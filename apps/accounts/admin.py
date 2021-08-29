@@ -10,5 +10,5 @@ admin.site.unregister(User)
 class UserModelAdmin(UserAdmin):
     list_display = ("id", "username", "email", "is_superuser")
     search_fields = ("id", "username", "email")
-    list_editable = ("username", )
+    list_editable = ("username",)
     list_per_page = 5
