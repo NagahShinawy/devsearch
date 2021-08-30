@@ -2,7 +2,7 @@
 
 {% load static %}
 
-{% block title %} {{ block.super }} | SOMETHING | {{ request.user|title }} {% endblock title %}
+{% block title %} {{ block.super }} | {{ app.name|title }} | {{ request.user|title }} {% endblock title %}
 
 {% block main %}
         <!-- Main Section -->
@@ -131,7 +131,7 @@
     <h1>My App</h1>
     {% if app %}
             {{ app.id }}<br>
-            {{ app.name }}<br>
+        <a href="/projects/{{ app.id|add:1 }}">{{ app.name }}</a><br>
             {{ app.developers }}<br>
     {% endif %}
 {% endblock main %}
