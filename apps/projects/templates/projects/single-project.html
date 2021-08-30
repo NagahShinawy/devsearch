@@ -131,7 +131,7 @@
     <h1>My App</h1>
     {% if app %}
             {{ app.id }}<br>
-        <a href="/projects/{{ app.id|add:1 }}">{{ app.name }}</a><br>
+        <a href="{% url 'projects:project' app.id|add:2 %}">{{ app.name }}</a><br>
             {{ app.developers }}<br>
     {% endif %}
 {% endblock main %}
