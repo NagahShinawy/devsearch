@@ -128,4 +128,10 @@
             <li>{{ app.name }}</li>
     {% endfor %}
     </ul>
+    <h1>My App</h1>
+    {% if app %}
+            {{ app.id }}<br>
+            {{ app.name }}<br>
+            {{ app.developers }}<br>
+    {% endif %}
 {% endblock main %}
