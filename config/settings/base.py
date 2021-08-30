@@ -46,7 +46,8 @@ INSTALLED_APPS = [
 INSTALLED_APPS += [
     "apps.accounts",
     "apps.developers",
-    "apps.projects"
+    "apps.projects",
+    "apps.contacts",
 ]
 if DEBUG and DEBUG_TOOLBAR:
     INSTALLED_APPS += ["debug_toolbar"]
