@@ -2,7 +2,7 @@
 
 {% load static %}
 
-{% block title %} {{ block.super }} - SOMETHING {% endblock title %}
+{% block title %} {{ block.super }} | SOMETHING | {{ request.user|title }} {% endblock title %}
 
 {% block main %}
         <!-- Main Section -->

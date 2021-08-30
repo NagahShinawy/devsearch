@@ -2,7 +2,7 @@
 
 {% load static %}
 
-{% block title %} {{ block.super }} - {{ account.username }} {% endblock title %}
+{% block title %} {{ block.super }} | {{ request.user|title }} {% endblock title %}
 
 {% block main %}
 

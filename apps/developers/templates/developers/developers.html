@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 
-{% block title %} {{ block.super }} - Developers {% endblock title %}
+{% block title %} {{ block.super }} | Developers | {{ request.user|title }} {% endblock title %}
 
 
 {% block main %}
