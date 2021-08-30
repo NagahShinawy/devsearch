@@ -110,4 +110,11 @@
     </div>
     </div>
   </main>
+   {% for app in apps %}
+        {% for key, value in app.items %}
+                {{ key }} ==> {{ value }}<br>
+        {% endfor %}
+       <hr>
+   {% endfor %}
+
 {% endblock main %}
