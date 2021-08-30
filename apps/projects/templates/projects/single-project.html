@@ -122,4 +122,10 @@
     {% if apps.2.developers > 100 %}
             <h3>Anat contains developers ({{ apps.2.developers }})</h3>
     {% endif %}
+    <hr>
+    <ul>
+        {% for app in apps %}
+            <li>{{ app.name }}</li>
+    {% endfor %}
+    </ul>
 {% endblock main %}
