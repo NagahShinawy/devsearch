@@ -17,7 +17,14 @@ def project(request, uuid):
         "users": 900,
         "developers": 80,
     }
-    apps = [sehhaty, gcc]
+
+    anat = {
+        "name": "Anat",
+        "users": 1010,
+        "developers": 120,
+    }
+
+    apps = [sehhaty, gcc, anat]
 
     return render(
         request,

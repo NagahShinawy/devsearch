@@ -117,4 +117,9 @@
        <hr>
    {% endfor %}
 
+    <h1>Anat</h1>
+    <p>{{ apps.2.name }}</p>
+    {% if apps.2.developers > 100 %}
+            <h3>Anat contains developers ({{ apps.2.developers }})</h3>
+    {% endif %}
 {% endblock main %}
