@@ -1,3 +1,4 @@
+from django.db import models
 from apps.core.db.models import UUIDMixin, InfoMixin, SlugMixin, TimestampMixin
 
 
@@ -12,4 +13,8 @@ class Project(UUIDMixin, InfoMixin, SlugMixin, TimestampMixin):
         verbose_name_plural = "Lean Projects"
 
 
+class Task(models.Model):
+    slug = models.SlugField(unique=True)
 
+    def __str__(self):
+        return self.slug
