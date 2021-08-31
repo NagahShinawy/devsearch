@@ -1,3 +1,13 @@
 from django.contrib import admin
+from .models import Project
 
-# Register your models here.
+
+@admin.register(Project)
+class ProjectModelAdmin(admin.ModelAdmin):
+    date_hierarchy = "created"
+
+    list_display = ("uuid", "title", "slug")
+    list_display_links = ("uuid", "title", "slug")
+    search_fields = ("uuid", "title", "description")
+    readonly_fields = ("uuid", "slug")
+

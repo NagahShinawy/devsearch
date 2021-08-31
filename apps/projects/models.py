@@ -1,3 +1,10 @@
-from django.db import models
+from apps.core.db.models import UUIDMixin, InfoMixin, SlugMixin, TimestampMixin
 
-# Create your models here.
+
+class Project(UUIDMixin, InfoMixin, SlugMixin, TimestampMixin):
+
+    def __str__(self):
+        return self.title
+
+
+

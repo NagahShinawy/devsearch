@@ -110,28 +110,4 @@
     </div>
     </div>
   </main>
-   {% for app in apps %}
-        {% for key, value in app.items %}
-                {{ key }} ==> {{ value }}<br>
-        {% endfor %}
-       <hr>
-   {% endfor %}
-
-    <h1>Anat</h1>
-    <p>{{ apps.2.name }}</p>
-    {% if apps.2.developers > 100 %}
-            <h3>Anat contains developers ({{ apps.2.developers }})</h3>
-    {% endif %}
-    <hr>
-    <ul>
-        {% for app in apps %}
-            <li>{{ app.name }}</li>
-    {% endfor %}
-    </ul>
-    <h1>My App</h1>
-    {% if app %}
-            {{ app.id }}<br>
-        <a href="{% url 'projects:project' app.id|add:2 %}">{{ app.name }}</a><br>
-            {{ app.developers }}<br>
-    {% endif %}
 {% endblock main %}
