@@ -4,11 +4,15 @@ from django.utils.translation import gettext_lazy as _
 
 
 class UUIDMixin(models.Model):
-    uuid = models.UUIDField(default=uuid.uuid4, primary_key=True, unique=True, editable=False)
+    uuid = models.UUIDField(
+        default=uuid.uuid4, primary_key=True, unique=True, editable=False
+    )
 
 
 class TimestampMixin(models.Model):
-    created = models.DateTimeField(auto_now_add=True, verbose_name=_("Created at"), null=True, blank=True)
+    created = models.DateTimeField(
+        auto_now_add=True, verbose_name=_("Created at"), null=True, blank=True
+    )
     updated = models.DateTimeField(
         auto_now=True, verbose_name=_("Updated at"), null=True, blank=True
     )  # last save

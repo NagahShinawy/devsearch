@@ -15,4 +15,3 @@ class ProjectModelAdmin(admin.ModelAdmin):
 
 
 admin.site.register(Task)
-

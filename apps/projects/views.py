@@ -1,11 +1,11 @@
 from django.shortcuts import render
 
 sehhaty = {
-        "id": 1,
-        "name": "Sehhaty",
-        "users": 45345,
-        "developers": 20,
-    }
+    "id": 1,
+    "name": "Sehhaty",
+    "users": 45345,
+    "developers": 20,
+}
 
 gcc = {
     "id": 2,
