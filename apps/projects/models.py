@@ -28,7 +28,7 @@ class Review(UUIDMixin, TimestampMixin, models.Model):
     # on_delete ==> what you will do with children if parent deleted ?
     body = models.TextField(null=True, blank=True, verbose_name=_("Body"))
     value = models.CharField(
-        max_length=256, choices=VoteType.choices, verbose_name=_("Value")
+        max_length=256, choices=VoteType.choices, verbose_name=_("Value"), default=VoteType.UP
     )
 
     proj = models.ForeignKey(

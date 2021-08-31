@@ -20,7 +20,7 @@ class ReviewModelAdmin(admin.ModelAdmin):
 
     list_display = ("uuid", "content", "value", "project", "created")
     search_fields = ("uuid", "body", "value")
-    readonly_fields = ("uuid", "value")
+    readonly_fields = ("uuid", )
 
     list_per_page = 10
 
