@@ -11,3 +11,5 @@ class ProjectModelAdmin(admin.ModelAdmin):
     search_fields = ("uuid", "title", "description")
     readonly_fields = ("uuid", "slug")
 
+    list_per_page = 10
+
