@@ -15,6 +15,7 @@ def get_project_representation(instance):
 @receiver(pre_save, sender=Project, dispatch_uid="update_slug_unlisted")
 def update_slug(sender, instance, **kwargs):
     project = get_project_representation(instance)
-    if instance.slug is None:
-        instance.slug = slugify(instance.title)
-        logger.info(f"Update 'slug' for {sender} <{project}> to <{instance.slug}>")
+    if instance.slug is not None:
+        return
+    instance.slug = slugify(instance.title)
+    logger.info(f"Update 'slug' for {sender} <{project}> to <{instance.slug}>")
