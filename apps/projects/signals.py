@@ -17,4 +17,4 @@ def update_slug(sender, instance, **kwargs):
     project = get_project_representation(instance)
     if instance.slug is None:
         instance.slug = slugify(instance.title)
-        logger.info(f"Update 'slug' for <'{sender.__class__}'> <{project}> to <{instance.slug}>")
+        logger.info(f"Update 'slug' for {sender} <{project}> to <{instance.slug}>")
