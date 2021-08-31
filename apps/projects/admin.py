@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Project, Task
+from .models import Project
 
 
 @admin.register(Project)
@@ -12,6 +12,3 @@ class ProjectModelAdmin(admin.ModelAdmin):
     readonly_fields = ("uuid", "slug")
 
     list_per_page = 10
-
-
-admin.site.register(Task)
