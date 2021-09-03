@@ -147,3 +147,8 @@ android.projects.add(gcc)
 
 flutter.projects.set([youtube])
 # from apps.projects import shell
+
+vscode = Tag.objects.create(name="Vscode")
+pycharm = Tag.objects.create(name="Pycharm")
+
+youtube.tags.set([vscode, pycharm])
