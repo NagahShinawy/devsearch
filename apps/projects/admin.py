@@ -16,12 +16,14 @@ class ProjectModelAdmin(admin.ModelAdmin):
         "image",
         "created",
         "updated",
+        "description"
     )
     list_display_links = ("uuid", "title", "slug")
     list_editable = (
         "votes",
         "vote_ratio",
         "image",
+        "description"
     )
     search_fields = ("uuid", "title", "description", "tags__name", "reviews__body")
     readonly_fields = ("uuid", "slug")

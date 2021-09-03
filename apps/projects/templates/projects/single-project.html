@@ -22,27 +22,20 @@
           </a>
         </div>
         <div class="column column--2of3">
-          <img class="singleProject__preview" src="{% static 'images/project-c.png' %}" alt="portfolio thumbnail" />
-          <a href="{% url 'accounts:profile' %}" class="singleProject__developer">Md. Shahriar Parvez</a>
-          <h2 class="singleProject__title">Portfolio Landing Page for a Coding Mentor</h2>
+          <img class="singleProject__preview" src="{{ project.image_url }}" alt="{{ project.title }}-{{ project.image_name }}" />
+          <a href="{% url 'accounts:profile' %}" class="singleProject__developer">OWNER</a>
+          <h2 class="singleProject__title">{{ project.title|capfirst }}</h2>
           <h3 class="singleProject__subtitle">About the Project</h3>
           <div class="singleProject__info">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Minima harum maxime debitis amet voluptates esse
-            a perferendis tempora, natus pariatur obcaecati odit quisquam fugit deserunt.
-
             <br />
             <br />
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Hic voluptates earum possimus a perferendis culpa
-            omnis, libero quae soluta, obcaecati amet. Quam earum ad qui reprehenderit eligendi porro ab possimus
-            fugit voluptatem rerum eius sapiente, nemo mollitia aperiam suscipit culpa corrupti officiis dicta soluta
-            ut similique! Iste soluta quae tempora alias assumenda? Nam nesciunt nihil enim tempore cum quo
-            architecto?
+            {{ project.description }}
           </div>
 
           <div class="comments">
             <h3 class="singleProject__subtitle">Feedback</h3>
             <h5 class="project--rating">
-              36% Postitive Feedback (18 Votes)
+                {{ project.vote_ratio }}% {{ project.feedback }} Feedback (18 Votes)
             </h5>
 
             <form class="form" action="#" method="POST">

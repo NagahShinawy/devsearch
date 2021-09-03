@@ -6,6 +6,9 @@ from apps.core import utils
 
 
 class Project(UUIDMixin, InfoMixin, SlugMixin, TimestampMixin, ImageModelMixin):
+    POSITIVE = "Positive"
+    NEGATIVE = "Negative"
+
     source_link = models.URLField(null=True, blank=True, verbose_name=_("Source Link"))
     demo_link = models.URLField(null=True, blank=True, verbose_name=_("Demo Link"))
     votes = models.IntegerField(default=0, verbose_name=_("Votes"))
@@ -28,6 +31,12 @@ class Project(UUIDMixin, InfoMixin, SlugMixin, TimestampMixin, ImageModelMixin):
 
     def tags_list(self):
         return utils.from_qs_to_list(self.tags.all())
+
+    @property
+    def feedback(self):
+        if self.vote_ratio >= 50:
+            return self.POSITIVE
+        return self.NEGATIVE
 
 
 class Review(UUIDMixin, TimestampMixin, models.Model):
