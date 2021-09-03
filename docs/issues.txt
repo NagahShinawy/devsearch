@@ -1,0 +1,3 @@
+<class 'apps.projects.admin.ProjectModelAdmin'>: (admin.E109) The value of 'list_display[6]' must not be a ManyToManyField.
+
+

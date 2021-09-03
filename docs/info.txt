@@ -1,0 +1,11 @@
+How to add multiple objects to ManyToMany relationship at once in Django ?
+
+
+Use: object.m2mfield.add(*items) as described in the documentation:
+
+add() accepts an arbitrary number of arguments, not a list of them.
+
+add(obj1, obj2, obj3, ...)
+To expand that list into arguments, use *
+
+add(*[obj1, obj2, obj3])

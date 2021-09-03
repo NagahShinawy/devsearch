@@ -2,6 +2,7 @@ from django.db import models
 from django.utils.translation import gettext_lazy as _
 from apps.core.db.models import UUIDMixin, InfoMixin, SlugMixin, TimestampMixin
 from .choices import VoteType
+from apps.core import utils
 
 
 class Project(UUIDMixin, InfoMixin, SlugMixin, TimestampMixin):
@@ -10,7 +11,11 @@ class Project(UUIDMixin, InfoMixin, SlugMixin, TimestampMixin):
     votes = models.IntegerField(default=0, verbose_name=_("Votes"))
     vote_ratio = models.IntegerField(default=0, verbose_name=_("Votes Ratio"))
     tags = models.ManyToManyField(
-        "projects.Tag", null=True, blank=True, verbose_name=_("Tags")
+        "projects.Tag",
+        null=True,
+        blank=True,
+        verbose_name=_("Tags"),
+        related_name="projects",
     )  # 'app_label.ModelName'
 
     def __str__(self):
@@ -20,6 +25,9 @@ class Project(UUIDMixin, InfoMixin, SlugMixin, TimestampMixin):
         ordering = ["-created"]
         verbose_name = "Project"
         verbose_name_plural = "Lean Projects"
+
+    def tags_list(self):
+        return utils.from_qs_to_list(self.tags.all())
 
 
 class Review(UUIDMixin, TimestampMixin, models.Model):
@@ -34,11 +42,14 @@ class Review(UUIDMixin, TimestampMixin, models.Model):
     # on_delete ==> what you will do with children if parent deleted ?
     body = models.TextField(null=True, blank=True, verbose_name=_("Body"))
     value = models.CharField(
-        max_length=256, choices=VoteType.choices, verbose_name=_("Value"), default=VoteType.UP
+        max_length=256,
+        choices=VoteType.choices,
+        verbose_name=_("Value"),
+        default=VoteType.UP,
     )
 
     def __str__(self):
-        return self.value
+        return self.body[:30]
 
     def project(self):
         return self.proj
@@ -54,3 +65,6 @@ class Tag(UUIDMixin, TimestampMixin, models.Model):
 
     def __str__(self):
         return self.name
+
+    def projects_list(self):
+        return utils.from_qs_to_list(self.projects.all())
