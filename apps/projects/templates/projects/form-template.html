@@ -1,7 +1,6 @@
 {% extends 'base.html' %}
 {% load static %}
 <body>
-
     {% block main %}
         <!-- Main Section -->
         <main class="formPage my-xl">
@@ -12,8 +11,11 @@
 
                 <form class="form" method="POST" action="{% url 'projects:create_project' %}">
                     {% csrf_token %}
-                    {{ form.as_ul }}
-                    <input type="submit" Submit>
+                    {% for field in form %}
+                            {{ field.label }}<br><br>
+                            {{ field }}<br><br>
+                    {% endfor %}
+                    <input class="btn btn--sub btn--lg  my-md" type="submit" value="Submit" />
                 </form>
             </div>
         </div>
