@@ -1,3 +1,5 @@
+from django.db.models import Q
+
 from .models import Project, Tag, Review
 
 # working with qs of one2Many and ManyToMany
@@ -65,7 +67,6 @@ tags_of_ecoommerce = ecoommerce.tags.all()
 print(tags_of_ecoommerce)
 tags_of_ecoommerce = ecoommerce.tags_list()
 print(tags_of_ecoommerce)
-
 
 # ################## #################  # #################  # #################  # #################
 
@@ -135,7 +136,6 @@ blog.tags.set([docker, ansible, google])  # replace and set new list
 
 blog.tags.add(kubernetes, aws, django)  # add new tags to project blog
 
-
 # # ################## #################  # #################  # #################  # #################
 # set multiple tags to project
 # from tag side
@@ -152,3 +152,12 @@ vscode = Tag.objects.create(name="Vscode")
 pycharm = Tag.objects.create(name="Pycharm")
 
 youtube.tags.set([vscode, pycharm])
+
+not_social = Project.objects.exclude(
+    Q(title__iexact="youtube")
+    | Q(title__iexact="facebook")
+    | Q(title__iexact="instgram")
+)
+
+
+print(not_social)
