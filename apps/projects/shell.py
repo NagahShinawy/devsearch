@@ -115,7 +115,6 @@ call_center_review = Review.objects.create(
 great_service = Review.objects.create(body="NICE SERVICE", proj=blog)
 
 # ecoommerce.reviews.add(great_service)
-# from apps.projects import shell
 
 great = Review.objects.create(body="GREAT", proj=instgram)
 
@@ -123,13 +122,28 @@ facebook.reviews.add(great)
 
 # # ################## #################  # #################  # #################  # #################
 # set multiple tags to project
-
+# from project side
 docker = Tag.objects.create(name="Docker")
 ansible = Tag.objects.create(name="Ansible")
 google = Tag.objects.create(name="Google Cloud")
 kubernetes = Tag.objects.create(name="Kubernetes")
+ios = Tag.objects.create(name="IOS")
+android = Tag.objects.create(name="Android")
+flutter = Tag.objects.create(name="Flutter")
 
 blog.tags.set([docker, ansible, google])  # replace and set new list
 
 blog.tags.add(kubernetes, aws, django)  # add new tags to project blog
 
+
+# # ################## #################  # #################  # #################  # #################
+# set multiple tags to project
+# from tag side
+anat = Project.objects.get(title__iexact="anat")
+gcc = Project.objects.get(title__iexact="gcc")
+
+ios.projects.set([anat, gcc])
+android.projects.add(gcc)
+
+flutter.projects.set([youtube])
+# from apps.projects import shell
