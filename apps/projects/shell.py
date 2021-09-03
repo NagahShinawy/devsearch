@@ -184,3 +184,8 @@ print(bad_votes)
 
 print("#" * 100)
 print(vote_range)
+
+# # ################## #################  # #################  # #################  # #################
+# delete
+grt = Review.objects.get(body__icontains="very cool app")
+grt.delete()
