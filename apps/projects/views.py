@@ -1,4 +1,8 @@
+from django.core.exceptions import ObjectDoesNotExist
+from django.http import HttpResponse
 from django.shortcuts import render
+
+from apps.projects.models import Project
 
 sehhaty = {
     "id": 1,
@@ -25,18 +29,18 @@ apps = [sehhaty, gcc, anat]
 
 
 def projects(request):
-    return render(request, template_name="projects/projects.html")
+    projs = Project.objects.all()
+    return render(request, template_name="projects/projects.html", context={"projects": projs})
 
 
 def project(request, uuid):
-    single_app = None
-    for app in apps:
-        if app["id"] == uuid:
-            single_app = app
-            break
+    try:
 
+        single = Project.objects.get(uuid__iexact=uuid)
+    except ObjectDoesNotExist:
+        return HttpResponse("Not Found")
     return render(
         request,
         template_name="projects/single-project.html",
-        context={"apps": apps, "sehhaty": sehhaty, "gcc": gcc, "app": single_app},
+        context={"project": single},
     )

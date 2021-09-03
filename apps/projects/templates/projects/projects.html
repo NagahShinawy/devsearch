@@ -215,4 +215,9 @@
     </div>
   </main>
 
+
+    {% for project in projects %}
+            <h5><a href="{% url 'projects:project' project.uuid %}">{{ project.title }}</a></h5>
+    {% endfor %}
+
 {% endblock main %}
