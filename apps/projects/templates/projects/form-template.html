@@ -12,27 +12,8 @@
 
                 <form class="form" method="POST" action="{% url 'projects:create_project' %}">
                     {% csrf_token %}
-                    <!-- Input:Text -->
-                    <div class="form__field">
-                        <label for="formInput#text">Title </label>
-                        <input class="input input--text" id="formInput#text" type="text" name="title" required
-                            placeholder="Enter text" />
-                    </div>
-
-                    <!-- Input:Text -->
-                    <div class="form__field">
-                        <label for="formInput#text">Image </label>
-                        <input class="input input--text" id="formInput#text" type="file" name="image"
-                            placeholder="Enter text" />
-                    </div>
-
-                    <!-- Input:Text -->
-                    <div class="form__field">
-                        <label for="formInput#text">Description </label>
-                        <input class="input input--text" id="formInput#text" type="text" name="description"
-                            placeholder="Enter text" />
-                    </div>
-                    <input class="btn btn--sub btn--lg  my-md" type="submit" value="Submit" />
+                    {{ form.as_ul }}
+                    <input type="submit" Submit>
                 </form>
             </div>
         </div>

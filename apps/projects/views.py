@@ -3,6 +3,7 @@ from django.http import HttpResponse
 from django.shortcuts import render, redirect
 
 from apps.projects.models import Project
+from .forms import ProjectModelForm
 
 
 def projects(request):
@@ -27,15 +28,12 @@ def project(request, uuid):
 
 
 def create_project(request):
+    project_form = ProjectModelForm()
     if request.method == "POST":
-        title = request.POST.get("title")
-        description = request.POST.get("description")
-        image = request.POST.get("image")
-        attrs = {
-            "title": title,
-            "description": description,
-            "image": image
-        }
-        Project.objects.create(**attrs)
-        return redirect("projects:projects")
-    return render(request, template_name="projects/form-template.html")
+        project_form = ProjectModelForm(request.POST)
+        if project_form.is_valid():
+            project_form.save()
+            return redirect("projects:projects")
+        else:
+            print("errors")
+    return render(request, template_name="projects/form-template.html", context={"form": project_form})
