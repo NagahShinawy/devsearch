@@ -11,7 +11,11 @@ class Project(UUIDMixin, InfoMixin, SlugMixin, TimestampMixin):
     votes = models.IntegerField(default=0, verbose_name=_("Votes"))
     vote_ratio = models.IntegerField(default=0, verbose_name=_("Votes Ratio"))
     tags = models.ManyToManyField(
-        "projects.Tag", null=True, blank=True, verbose_name=_("Tags"), related_name="projects"
+        "projects.Tag",
+        null=True,
+        blank=True,
+        verbose_name=_("Tags"),
+        related_name="projects",
     )  # 'app_label.ModelName'
 
     def __str__(self):
@@ -38,7 +42,10 @@ class Review(UUIDMixin, TimestampMixin, models.Model):
     # on_delete ==> what you will do with children if parent deleted ?
     body = models.TextField(null=True, blank=True, verbose_name=_("Body"))
     value = models.CharField(
-        max_length=256, choices=VoteType.choices, verbose_name=_("Value"), default=VoteType.UP
+        max_length=256,
+        choices=VoteType.choices,
+        verbose_name=_("Value"),
+        default=VoteType.UP,
     )
 
     def __str__(self):

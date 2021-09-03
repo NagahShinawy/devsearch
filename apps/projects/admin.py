@@ -6,8 +6,21 @@ from .models import Project, Tag, Review
 class ProjectModelAdmin(admin.ModelAdmin):
     date_hierarchy = "created"
 
-    list_display = ("uuid", "title", "slug", "tags_list", "created", "updated")
+    list_display = (
+        "uuid",
+        "title",
+        "slug",
+        "votes",
+        "vote_ratio",
+        "tags_list",
+        "created",
+        "updated",
+    )
     list_display_links = ("uuid", "title", "slug")
+    list_editable = (
+        "votes",
+        "vote_ratio",
+    )
     search_fields = ("uuid", "title", "description", "tags__name", "reviews__body")
     readonly_fields = ("uuid", "slug")
 

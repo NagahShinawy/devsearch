@@ -7,5 +7,5 @@ app_name = "projects"
 
 urlpatterns = [
     path("", projects, name="projects"),
-    path("<int:uuid>/", project, name="project"),
+    path("<str:uuid>/", project, name="project"),
 ]
