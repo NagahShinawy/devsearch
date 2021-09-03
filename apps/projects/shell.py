@@ -70,7 +70,7 @@ print(tags_of_ecoommerce)
 # ################## #################  # #################  # #################  # #################
 
 
-# add/remove using relationship ===> from Project side
+# add/remove using m2m relationship ===> from Project side
 
 # add 'Tag' flask from 'Project'  blog
 
@@ -87,16 +87,49 @@ print(blog.tags.all())
 # remove 'Tag' django from 'Project'  blog
 blog.tags.remove(django)
 print(blog.tags.all())
-# from apps.projects import shell
 
 # ################## #################  # #################  # #################  # #################
 
-# add/remove using relationship ===> from Tag side
+# add/remove using m2m relationship ===> from Tag side
 
 # create new 'Tag' and add it to 'Projects' youtube & instgram
 aws = Tag.objects.create(name="AWS")
 youtube = Project.objects.get(title__iexact="youtube")
 instgram = Project.objects.get(title__iexact="instgram")
+facebook = Project.objects.get(title__iexact="facebook")
 
 aws.projects.add(youtube)
 aws.projects.add(instgram)
+
+# ################## #################  # #################  # #################  # #################
+
+# add/remove using one2m relationship
+
+call_center_review = Review.objects.create(
+    body="Fast Call center support", proj=instgram
+)
+
+# youtube.reviews.add(call_center_review)
+
+
+great_service = Review.objects.create(body="NICE SERVICE", proj=blog)
+
+# ecoommerce.reviews.add(great_service)
+# from apps.projects import shell
+
+great = Review.objects.create(body="GREAT", proj=instgram)
+
+facebook.reviews.add(great)
+
+# # ################## #################  # #################  # #################  # #################
+# set multiple tags to project
+
+docker = Tag.objects.create(name="Docker")
+ansible = Tag.objects.create(name="Ansible")
+google = Tag.objects.create(name="Google Cloud")
+kubernetes = Tag.objects.create(name="Kubernetes")
+
+blog.tags.set([docker, ansible, google])  # replace and set new list
+
+blog.tags.add(kubernetes, aws, django)  # add new tags to project blog
+
