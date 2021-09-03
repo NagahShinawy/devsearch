@@ -1,6 +1,7 @@
 from django.db.models import Q
 
 from .models import Project, Tag, Review
+
 SEP = 9
 # working with qs of one2Many and ManyToMany
 
@@ -110,12 +111,12 @@ call_center_review = Review.objects.create(
     body="Fast Call center support", proj=instgram
 )
 
-# youtube.reviews.add(call_center_review)
+youtube.reviews.add(call_center_review)
 
 
 great_service = Review.objects.create(body="NICE SERVICE", proj=blog)
 
-# ecoommerce.reviews.add(great_service)
+ecoommerce.reviews.add(great_service)
 
 great = Review.objects.create(body="GREAT", proj=instgram)
 
@@ -153,6 +154,8 @@ pycharm = Tag.objects.create(name="Pycharm")
 
 youtube.tags.set([vscode, pycharm])
 
+# # ################## #################  # #################  # #################  # #################
+# exclude
 not_social = Project.objects.exclude(
     Q(title__iexact="youtube")
     | Q(title__iexact="facebook")
@@ -161,7 +164,23 @@ not_social = Project.objects.exclude(
 
 print(not_social)
 
+# # ################## #################  # #################  # #################  # #################
+
+# filter by month
 projects_in_sep = Project.objects.filter(created__month=SEP)
 
 
 print(projects_in_sep)
+
+# # ################## #################  # #################  # #################  # #################
+# gt lt, lte
+
+good_votes = Project.objects.filter(votes__gte=50)
+bad_votes = Project.objects.filter(votes__lte=50)
+vote_range = Project.objects.filter(votes__range=[35, 40])
+
+print(good_votes)
+print(bad_votes)
+
+print("#" * 100)
+print(vote_range)
