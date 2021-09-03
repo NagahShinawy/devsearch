@@ -2,6 +2,7 @@ from .models import Project, Tag, Review
 
 # working with qs of one2Many and ManyToMany
 
+# ################## #################  # #################  # #################  # #################
 # all projects
 projects = Project.objects.all()
 
@@ -9,8 +10,12 @@ print(projects)
 
 print("#" * 100)
 
+# ################## #################  # #################  # #################  # #################
 # get sehhaty app
+
 sehhaty = Project.objects.get(title__iexact="sehhaty")
+
+# ################## #################  # #################  # #################  # #################
 
 # get reviews of sehhaty
 sehhaty_reviews = sehhaty.reviews.all()
@@ -21,6 +26,9 @@ print("#" * 100)
 
 print(sehhaty_reviews)
 
+# ################## #################  # #################  # #################  # #################
+
+
 # get all projects that contain 'very' in the review body
 
 # attr__attr__expression ==> obj__att__expression
@@ -30,16 +38,22 @@ print(projects)
 
 projects = Project.objects.filter(reviews__body__icontains="app").distinct()
 
+# ################## #################  # #################  # #################  # #################
+
 # get 'Projects' that use django 'Tag'
 
 django = Tag.objects.get(name__iexact="django")
 projects_of_django = django.projects.all()  # ===> tagObj.related_name.all()
-projects_of_django_2 = django.projects_list()  # ===> tagObj.custom_method() ==> return related projects
+projects_of_django_2 = (
+    django.projects_list()
+)  # ===> tagObj.custom_method() ==> return related projects
 
 print("#" * 50)
 print(django)
 
 print(projects_of_django)
+
+# ################## #################  # #################  # #################  # #################
 
 # get tools used in one project
 
@@ -52,4 +66,37 @@ print(tags_of_ecoommerce)
 tags_of_ecoommerce = ecoommerce.tags_list()
 print(tags_of_ecoommerce)
 
+
+# ################## #################  # #################  # #################  # #################
+
+
+# add/remove using relationship ===> from Project side
+
+# add 'Tag' flask from 'Project'  blog
+
+print("*" * 100)
+flask = Tag.objects.get(name__iexact="flask")
+blog = Project.objects.get(title__iexact="blog")
+
+print(blog.tags.all())
+blog.tags.add(flask)
+print(blog.tags.all())
+
+# ################## #################  # #################  # #################  # #################
+
+# remove 'Tag' django from 'Project'  blog
+blog.tags.remove(django)
+print(blog.tags.all())
 # from apps.projects import shell
+
+# ################## #################  # #################  # #################  # #################
+
+# add/remove using relationship ===> from Tag side
+
+# create new 'Tag' and add it to 'Projects' youtube & instgram
+aws = Tag.objects.create(name="AWS")
+youtube = Project.objects.get(title__iexact="youtube")
+instgram = Project.objects.get(title__iexact="instgram")
+
+aws.projects.add(youtube)
+aws.projects.add(instgram)
