@@ -18,8 +18,9 @@ def project(request, uuid):
         single = Project.objects.get(uuid__iexact=uuid)
     except ObjectDoesNotExist:
         return HttpResponse("Not Found")
+    tags = single.tags.all()
     return render(
         request,
         template_name="projects/single-project.html",
-        context={"project": single},
+        context={"project": single, "tags": tags},
     )
