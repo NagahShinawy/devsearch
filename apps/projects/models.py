@@ -1,11 +1,11 @@
 from django.db import models
 from django.utils.translation import gettext_lazy as _
-from apps.core.db.models import UUIDMixin, InfoMixin, SlugMixin, TimestampMixin
+from apps.core.db.models import UUIDMixin, InfoMixin, SlugMixin, TimestampMixin, ImageModelMixin
 from .choices import VoteType
 from apps.core import utils
 
 
-class Project(UUIDMixin, InfoMixin, SlugMixin, TimestampMixin):
+class Project(UUIDMixin, InfoMixin, SlugMixin, TimestampMixin, ImageModelMixin):
     source_link = models.URLField(null=True, blank=True, verbose_name=_("Source Link"))
     demo_link = models.URLField(null=True, blank=True, verbose_name=_("Demo Link"))
     votes = models.IntegerField(default=0, verbose_name=_("Votes"))

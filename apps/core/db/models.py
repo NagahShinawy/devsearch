@@ -1,6 +1,15 @@
+import datetime
 import uuid
 from django.db import models
 from django.utils.translation import gettext_lazy as _
+
+
+def model_directory(instance, filename):
+    return (
+        f"{instance.__class__.__name__.lower()}/"
+        f"{datetime.date.today().year}/"
+        f"{datetime.date.today().month}/{filename}"
+    )
 
 
 class UUIDMixin(models.Model):
@@ -36,3 +45,26 @@ class InfoMixin(models.Model):
 
     class Meta:
         abstract = True
+
+
+class ImageModelMixin(models.Model):
+    image = models.ImageField(
+        upload_to=model_directory, blank=True, null=True, verbose_name=_("image")
+    )
+
+    class Meta:
+        abstract = True
+
+    @property
+    def image_url(self):
+        try:
+            return self.image.url
+        except (TypeError, ValueError, AttributeError):
+            return str()
+
+    @property
+    def image_name(self):
+        try:
+            return self.image.name.split("/")[-1]
+        except (TypeError, ValueError, AttributeError, IndexError):
+            return str()
