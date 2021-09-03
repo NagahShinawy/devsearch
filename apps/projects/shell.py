@@ -1,7 +1,7 @@
 from django.db.models import Q
 
 from .models import Project, Tag, Review
-
+SEP = 9
 # working with qs of one2Many and ManyToMany
 
 # ################## #################  # #################  # #################  # #################
@@ -159,5 +159,9 @@ not_social = Project.objects.exclude(
     | Q(title__iexact="instgram")
 )
 
-
 print(not_social)
+
+projects_in_sep = Project.objects.filter(created__month=SEP)
+
+
+print(projects_in_sep)
