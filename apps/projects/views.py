@@ -6,7 +6,7 @@ from apps.core import utils
 
 
 def projects(request):
-    projs = Project.objects.all().order_by("-created")
+    projs = Project.objects.all()
     return render(
         request, template_name="projects/projects.html", context={"projects": projs}
     )
