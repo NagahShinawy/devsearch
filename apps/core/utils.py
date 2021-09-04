@@ -1,6 +1,5 @@
 from django.db import models
 from django.core.exceptions import ObjectDoesNotExist
-from django.http import HttpResponse
 
 
 def from_qs_to_list(qs: models.QuerySet) -> list:
@@ -12,4 +11,4 @@ def get_object_or_404(model, uuid):
         obj = model.objects.get(uuid__iexact=uuid)
         return obj
     except ObjectDoesNotExist:
-        return HttpResponse("Not Found")
+        return False
