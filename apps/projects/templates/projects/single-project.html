@@ -53,6 +53,9 @@
               </div>
               <input class="btn btn--sub btn--lg" type="submit" value="Comments" />
             </form>
+            <form id="delete" action="{% url 'projects:delete' project.uuid %}">
+                <input id="delete-btn" class="btn btn--sub btn--lg" type="submit" value="Delete" />
+            </form>
             <div class="commentList">
               <div class="comment">
                 <a href="{% url 'accounts:profile' %}">

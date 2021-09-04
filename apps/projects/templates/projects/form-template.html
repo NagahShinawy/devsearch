@@ -9,7 +9,7 @@
                 <a class="backButton" href="{% url 'projects:projects' %}"><i class="im im-angle-left"></i></a>
                 <br>
 
-                <form class="form" method="POST" action="{% url 'projects:create_project' %}">
+                <form class="form" method="POST" action="{% url 'projects:create' %}">
                     {% csrf_token %}
                     {% for field in form %}
                             {{ field.label }}<br><br>

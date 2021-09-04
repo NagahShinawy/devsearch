@@ -861,3 +861,17 @@ img {
 
   z-index: 99999;
 }
+
+
+form#delete{
+    display: inline !important;
+}
+
+input#delete-btn{
+    float: right !important;
+    margin-top: -53px !important;
+}
+
+input#delete-btn, input#confirm-delete-btn {
+   background-color: #d61e38 !important;
+}
