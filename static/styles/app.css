@@ -863,7 +863,7 @@ img {
 }
 
 
-a#delete{
+a#delete, a#update{
     display: inline !important;
 }
 
@@ -874,4 +874,10 @@ input#delete-btn{
 
 input#delete-btn, input#confirm-delete-btn {
    background-color: #d61e38 !important;
+}
+
+input#update-btn {
+  float: right !important;
+  margin-right: 150px !important;
+  margin-top: -52px !important
 }

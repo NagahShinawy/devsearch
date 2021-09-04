@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+
+{% block main %}
+    <h1>You are updating '{{ project.title|capfirst }}'</h1>
+    <form action="{% url 'projects:update' project.uuid %}" method="POST">
+        {% csrf_token %}
+        {{ form.as_ul }}
+        <input class="btn btn--sub btn--lg" type="submit" value="Comments" />
+    </form>
+{% endblock %}

@@ -42,3 +42,16 @@ def delete_project(request, uuid):
         project.delete()
         return redirect("projects:projects")
     return render(request, template_name="projects/delete.html", context={"project": project})
+
+
+def update_project(request, uuid):
+    project = utils.get_object_or_404(model=Project, uuid=uuid)
+    form = ProjectModelForm(instance=project)
+    if request.method == "POST":
+        form = ProjectModelForm(data=request.POST, instance=project)
+        if form.is_valid():
+            form.save()
+            return redirect("projects:projects")
+    return render(request, template_name="projects/update.html", context={"project": project, "form": form})
+
+
