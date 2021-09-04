@@ -863,7 +863,7 @@ img {
 }
 
 
-form#delete{
+a#delete{
     display: inline !important;
 }
 
