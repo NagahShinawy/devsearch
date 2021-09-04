@@ -6,7 +6,7 @@ from apps.core import utils
 
 
 def projects(request):
-    projs = Project.objects.all()
+    projs = Project.objects.all().order_by("-created")
     return render(
         request, template_name="projects/projects.html", context={"projects": projs}
     )
@@ -27,7 +27,7 @@ def single_project(request, uuid):
 def create_project(request):
     project_form = ProjectModelForm()
     if request.method == "POST":
-        project_form = ProjectModelForm(data=request.POST)
+        project_form = ProjectModelForm(data=request.POST, files=request.FILES)
         if project_form.is_valid():
             project_form.save()
             return redirect("projects:projects")
