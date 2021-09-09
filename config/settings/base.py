@@ -64,6 +64,9 @@ MIDDLEWARE += [
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
+
+    # third party
+    'whitenoise.middleware.WhiteNoiseMiddleware'
 ]
 
 ROOT_URLCONF = "devsearch.urls"
@@ -140,7 +143,7 @@ USE_TZ = True
 
 # static
 STATIC_URL = "/static/"
-STATIC_ROOT = ROOT_DIR / "collectstatic"
+STATIC_ROOT = ROOT_DIR / "staticfiles"
 STATICFILES_DIRS = [
     ROOT_DIR / "static",
 ]
@@ -160,6 +163,9 @@ DJANGO_SUPERUSER_PASSWORD = os.environ.get("DJANGO_SUPERUSER_PASSWORD")
 DJANGO_SUPERUSER_USERNAME = os.environ.get("DJANGO_SUPERUSER_USERNAME")
 DJANGO_SUPERUSER_EMAIL = os.environ.get("DJANGO_SUPERUSER_EMAIL")
 
+
+# STATICFILES on production
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 # Logging
 LOGGING = {
