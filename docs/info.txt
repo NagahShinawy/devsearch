@@ -22,3 +22,16 @@ request.POST
 python manage.py collectstatic
 
 - collect all static files from all apps to 'STATIC_ROOT'
+
+- whitenoise for serving staticfiles
+
+
+==============================================
+- serve staticfiles on production
+- django can not track staticfiles if you do the following:
+
+DEBUG = False
+ALLOWED_HOSTS = ["127.0.0.1", "localhost", "devsearch"]
+
+
+- so you have to use 'whitenoise'

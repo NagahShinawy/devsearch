@@ -24,11 +24,11 @@ ROOT_DIR = BASE_DIR.parent
 SECRET_KEY = os.environ.get("SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 DEBUG_TOOLBAR = os.environ.get("DEBUG_TOOLBAR", default=False)
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["127.0.0.1", "localhost", "devsearch"]
 
 
 # Application definition
