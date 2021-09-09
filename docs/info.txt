@@ -15,3 +15,10 @@ add(*[obj1, obj2, obj3])
 request.POST
 
 <QueryDict: {'csrfmiddlewaretoken': ['YGdGvh8vLDc3Ytw8VvfKTzugJLyNdzDSrL5ZbdjlChMLQvCZhtJTKcH1bCoLPusu'], 'title': ['test'], 'tags': ['a803bb80-76fd-4990-887f-e1f764a19b12', '40e33980-289a-4db0-a950-28b678c645f3'], 'description': ['testingdesc'], 'source_link': [''], 'demo_link': [''], 'image': ['']}>
+
+
+==============================================
+
+python manage.py collectstatic
+
+- collect all static files from all apps to 'STATIC_ROOT'
