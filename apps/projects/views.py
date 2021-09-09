@@ -58,7 +58,7 @@ def update_project(request, uuid):
 
     form = ProjectModelForm(instance=project)
     if request.method == "POST":
-        form = ProjectModelForm(data=request.POST, instance=project)
+        form = ProjectModelForm(data=request.POST, instance=project, files=request.FILES)
         if form.is_valid():
             form.save()
             return redirect("projects:projects")
