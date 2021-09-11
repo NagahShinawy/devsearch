@@ -39,6 +39,8 @@
 input.input[type='text'],
 input.input[type='email'],
 input.input[type='password'],
+input.input[type='url'],
+input.input[type='file'],
 input.input[type='number'],
 select.input,
 textarea.input {

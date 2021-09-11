@@ -62,6 +62,6 @@ def update_project(request, uuid):
         if form.is_valid():
             form.save()
             return redirect("projects:projects")
-    return render(request, template_name="projects/update.html", context={"project": project, "form": form})
+    return render(request, template_name="projects/form-template.html", context={"project": project, "form": form})
 
 
