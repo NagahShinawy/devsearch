@@ -34,7 +34,7 @@
                   {% else %}
                     <img class="project__thumbnail" src="{% static 'images/default.jpg' %}" alt="project thumbnail" />
           {% endif %}
-          <a href="{% url 'accounts:profile' %}" class="singleProject__developer">OWNER</a>
+          <a href="{% url 'accounts:profile' %}" class="singleProject__developer">{{ project.owner|title }}</a>
           <h2 class="singleProject__title">{{ project.title|capfirst }}</h2>
           <h3 class="singleProject__subtitle">About the Project</h3>
           <div class="singleProject__info">

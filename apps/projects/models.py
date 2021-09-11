@@ -9,6 +9,7 @@ from apps.core.db.models import (
 )
 from .choices import VoteType
 from apps.core import utils
+from apps.developers.models import Profile
 
 
 class Project(UUIDMixin, InfoMixin, SlugMixin, TimestampMixin, ImageModelMixin):
@@ -16,7 +17,7 @@ class Project(UUIDMixin, InfoMixin, SlugMixin, TimestampMixin, ImageModelMixin):
     NEGATIVE = "Negative"
     VOTE = "Vote"
     VOTES = "Votes"
-
+    owner = models.ForeignKey(Profile, on_delete=models.CASCADE, related_name="projects", null=True, blank=True)
     source_link = models.URLField(null=True, blank=True, verbose_name=_("Source Link"))
     demo_link = models.URLField(null=True, blank=True, verbose_name=_("Demo Link"))
     votes = models.IntegerField(default=0, verbose_name=_("Votes"))

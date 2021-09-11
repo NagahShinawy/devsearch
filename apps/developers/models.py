@@ -5,7 +5,17 @@ from apps.core.db.models import (
     ImageModelMixin,
     SocialMediaLinksMixin,
     TimestampMixin,
+    InfoMixin
 )
+
+
+class Skill(InfoMixin, TimestampMixin, models.Model):
+
+    class Meta:
+        ordering = ["id"]
+
+    def __str__(self):
+        return self.title
 
 
 class Profile(
@@ -19,6 +29,7 @@ class Profile(
     short_intro = models.CharField(max_length=256, null=True, blank=True)
     location = models.CharField(max_length=256, null=True, blank=True)
     boi = models.TextField(max_length=256, null=True, blank=True)
+    skills = models.ManyToManyField(Skill, related_name="profile")
 
     def __str__(self):
         return self.user.username

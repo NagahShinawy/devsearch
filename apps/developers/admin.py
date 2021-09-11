@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Profile
+from .models import Profile, Skill
 
 
 @admin.register(Profile)
@@ -18,3 +18,9 @@ class ProfileModelAdmin(admin.ModelAdmin):
     # get_username.admin_order_field = 'author'  # Allows column order sorting
     get_username.short_description = 'username'  # Renames column head
     get_email.short_description = 'email'  # Renames column head
+
+
+@admin.register(Skill)
+class SkillModelAdmin(admin.ModelAdmin):
+    list_display = ("id", "title", "created", "updated", "description")
+    list_editable = ("title", "description")

@@ -34,7 +34,7 @@
           {% for profile in profiles %}
             <div class="column card">
             <div class="dev">
-              <a href="{% url 'accounts:profile' %}" class="card__body">
+              <a href="{% url 'developers:profile' username=profile.user.username %}" class="card__body">
                 <div class="dev__profile">
                     <img class="avatar avatar--md" src="{{ profile.image_url }}" alt="image" />
                   <div class="dev__meta">
@@ -46,24 +46,11 @@
                     {{ profile.boi }}
                 </p>
                 <div class="dev__skills">
-                  <span class="tag tag--pill tag--main">
-                    <small>JavaScript</small>
+                  {% for skill in profile.skills.all %}
+                    <span class="tag tag--pill tag--main">
+                    <small>{{ skill }}</small>
                   </span>
-                  <span class="tag tag--pill tag--main">
-                    <small>React</small>
-                  </span>
-                  <span class="tag tag--pill tag--main">
-                    <small>SCSS</small>
-                  </span>
-                  <span class="tag tag--pill tag--main">
-                    <small>Nodejs</small>
-                  </span>
-                  <span class="tag tag--pill tag--main">
-                    <small>Express</small>
-                  </span>
-                  <span class="tag tag--pill tag--main">
-                    <small>GraphQL</small>
-                  </span>
+                  {% endfor %}
                 </div>
               </a>
             </div>
