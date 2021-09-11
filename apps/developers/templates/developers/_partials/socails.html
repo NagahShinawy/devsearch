@@ -1,0 +1,9 @@
+<ul class="dev__social">
+    {% for website, url in profile.social_links.items %}
+        <li>
+        <a title="{{ website|capfirst }}" href="{{ url }}" target="_blank">
+            <i class="im im-{{ website }}"></i>
+        </a>
+        </li>
+    {% endfor %}
+</ul>

@@ -75,6 +75,7 @@ class SocialMediaLinksMixin(models.Model):
     twitter = models.URLField(null=True, blank=True)
     github = models.URLField(null=True, blank=True)
     linkedin = models.URLField(null=True, blank=True)
+    stackoverflow = models.URLField(null=True, blank=True)
     youtube = models.URLField(null=True, blank=True)
     website = models.URLField(null=True, blank=True)
 

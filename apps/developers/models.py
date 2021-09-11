@@ -39,3 +39,14 @@ class Profile(
         if not img:
             return self.DEFAULT_PROFILE_IMAGE
         return img
+
+    def social_links(self):
+        links = {
+            "github": self.github,
+            "stackoverflow": self.stackoverflow,
+            "twitter": self.twitter,
+            "linkedin": self.linkedin,
+            "facebook": self.facebook,
+            "globe": self.website,
+        }
+        return {key: value for key, value in links.items() if value}
