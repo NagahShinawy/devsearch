@@ -881,3 +881,15 @@ input#update-btn {
   margin-right: 150px !important;
   margin-top: -52px !important
 }
+
+
+header div nav ul {
+  width: 827px;
+
+}
+
+header.header a.header__logo img {
+  float: left;
+  margin-left: -61px;
+  width: 172px;
+}
