@@ -1,7 +1,7 @@
 from django.shortcuts import render
-from django.http import HttpResponseNotFound
+from django.http import HttpResponse
+from django.core.exceptions import ObjectDoesNotExist
 from .models import Profile
-from apps.core import utils
 
 
 def index(request):
@@ -10,8 +10,8 @@ def index(request):
 
 
 def single_profile(request, username):
-    profile = Profile.objects.get(user__username__iexact=username)
-    if profile is False:
-        return HttpResponseNotFound("Not Found")
-
+    try:
+        profile = Profile.objects.get(user__username__iexact=username)
+    except ObjectDoesNotExist:
+        return HttpResponse("Profile Not Created Yet")
     return render(request=request, template_name="developers/profile.html", context={"profile": profile})
