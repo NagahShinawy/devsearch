@@ -47,7 +47,9 @@ def delete_project(request, uuid):
     if request.method == "POST":
         project.delete()
         return redirect("projects:projects")
-    return render(request, template_name="projects/delete.html", context={"project": project})
+    return render(
+        request, template_name="projects/delete.html", context={"project": project}
+    )
 
 
 def update_project(request, uuid):
@@ -58,10 +60,14 @@ def update_project(request, uuid):
 
     form = ProjectModelForm(instance=project)
     if request.method == "POST":
-        form = ProjectModelForm(data=request.POST, instance=project, files=request.FILES)
+        form = ProjectModelForm(
+            data=request.POST, instance=project, files=request.FILES
+        )
         if form.is_valid():
             form.save()
             return redirect("projects:projects")
-    return render(request, template_name="projects/form-template.html", context={"project": project, "form": form})
-
-
+    return render(
+        request,
+        template_name="projects/form-template.html",
+        context={"project": project, "form": form},
+    )

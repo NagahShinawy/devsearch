@@ -68,3 +68,15 @@ class ImageModelMixin(models.Model):
             return self.image.name.split("/")[-1]
         except (TypeError, ValueError, AttributeError, IndexError):
             return str()
+
+
+class SocialMediaLinksMixin(models.Model):
+    facebook = models.URLField(null=True, blank=True)
+    twitter = models.URLField(null=True, blank=True)
+    github = models.URLField(null=True, blank=True)
+    linkedin = models.URLField(null=True, blank=True)
+    youtube = models.URLField(null=True, blank=True)
+    website = models.URLField(null=True, blank=True)
+
+    class Meta:
+        abstract = True

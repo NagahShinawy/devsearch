@@ -21,12 +21,11 @@ from apps.developers.views import index
 
 
 urlpatterns = [
-    path("", index, name="index"),
-    path("admin/", admin.site.urls),
-    path("developers/", include("apps.developers.urls")),
+    path("", include("apps.developers.urls")),
     path("projects/", include("apps.projects.urls")),
     path("inbox/", include("apps.contacts.urls")),
     path("accounts/", include("apps.accounts.urls")),
+    path("admin/", admin.site.urls),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 
