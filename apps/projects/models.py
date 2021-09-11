@@ -14,6 +14,8 @@ from apps.core import utils
 class Project(UUIDMixin, InfoMixin, SlugMixin, TimestampMixin, ImageModelMixin):
     POSITIVE = "Positive"
     NEGATIVE = "Negative"
+    VOTE = "Vote"
+    VOTES = "Votes"
 
     source_link = models.URLField(null=True, blank=True, verbose_name=_("Source Link"))
     demo_link = models.URLField(null=True, blank=True, verbose_name=_("Demo Link"))
@@ -43,6 +45,11 @@ class Project(UUIDMixin, InfoMixin, SlugMixin, TimestampMixin, ImageModelMixin):
         if self.vote_ratio >= 50:
             return self.POSITIVE
         return self.NEGATIVE
+
+    def pluralize(self):
+        if self.votes > 1:
+            return self.VOTES
+        return self.VOTE
 
 
 class Review(UUIDMixin, TimestampMixin, models.Model):

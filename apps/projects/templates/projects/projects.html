@@ -47,7 +47,7 @@
                   <p><a class="project__author" href="{% url 'accounts:profile' %}">By OWNER</a></p>
                   <p class="project--rating">
                     <span style="font-weight: bold;">{{ project.vote_ratio }}%</span> {{ project.feedback }}
-                    Feedback ({{ project.votes }} Votes)
+                    Feedback ({{ project.votes }} Vote{{ project.votes|pluralize }})
                   </p>
                   <div class="project__tags">
                     {% for tag in project.tags.all %}
