@@ -35,7 +35,7 @@
           </div>
           <div class="devInfo">
             <h3 class="devInfo__title">Skills</h3>
-            {% for skill in profile.skills.all %}
+            {% for skill in profile.base_skills %}
                     <div class="devInfo__skills">
               <div class="devSkill">
                 <h4 class="devSkill__title">{{ skill }}</h4>
@@ -47,9 +47,11 @@
 
               <h3 class="devInfo__subtitle">Other Skills</h3>
               <div class="devInfo__otherSkills">
-                <span class="tag tag--pill tag--sub tag--lg">
-                  <small>Figma</small>
+                {% for other_skill in profile.other_skills %}
+                    <span class="tag tag--pill tag--sub tag--lg">
+                  <small>{{ other_skill }}</small>
                 </span>
+                {% endfor %}
               </div>
             </div>
           </div>

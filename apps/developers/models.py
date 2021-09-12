@@ -50,3 +50,11 @@ class Profile(
             "globe": self.website,
         }
         return {website: url for website, url in links.items() if url}
+
+    @property
+    def base_skills(self):
+        return self.skills.exclude(description__iexact="")
+
+    @property
+    def other_skills(self):
+        return self.skills.filter(description__iexact="")
