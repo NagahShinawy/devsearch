@@ -7,4 +7,5 @@ class ProjectsConfig(AppConfig):
     name = "apps.projects"
 
     def ready(self):
+        import_module("apps.core.signals")
         import_module("apps.projects.signals")

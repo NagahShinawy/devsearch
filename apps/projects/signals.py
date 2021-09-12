@@ -22,10 +22,9 @@ def update_slug(sender, instance, **kwargs):
     logger.info(f"Update 'slug' for {sender} <{project}> to <{instance.slug}>")
 
 
-@receiver(post_delete, sender=Project, dispatch_uid="delete_img")
-def delete_img(sender, instance, **kwargs):
-    project = get_project_representation(instance)
+@receiver(post_delete, sender=Project, dispatch_uid="delete_img_project")
+def delete_img_project(sender, instance, **kwargs):
     if not instance.image:
         return
     os.remove(instance.image.path)
-    logger.info(f"image <{instance.image}>  for {sender} <{project}> was deleted")
+    logger.info(f"image <{instance.image}> of <{instance}> for {sender} was deleted")

@@ -43,3 +43,8 @@ ALLOWED_HOSTS = ["127.0.0.1", "localhost", "devsearch"]
 =========================
 pluralize
 You have {{ num_cherries }} cherr{{ num_cherries|pluralize:"y,ies" }}.
+
+=========================
+
+- signals: trigger actions and way to listening the evens and actions we perform.
+- signal uses senders & receivers to do that.
