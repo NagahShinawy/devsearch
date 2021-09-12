@@ -1,15 +1,18 @@
 from django.db import models
 from django.contrib.auth.models import User
+from .managers import SkillManager
 from apps.core.db.models import (
     UUIDMixin,
     ImageModelMixin,
     SocialMediaLinksMixin,
     TimestampMixin,
-    InfoMixin
+    InfoMixin,
 )
 
 
 class Skill(InfoMixin, TimestampMixin, models.Model):
+
+    objects = SkillManager()
 
     class Meta:
         ordering = ["id"]
@@ -51,10 +54,8 @@ class Profile(
         }
         return {website: url for website, url in links.items() if url}
 
-    @property
     def base_skills(self):
-        return self.skills.exclude(description__iexact="")
+        return self.skills.base_skills
 
-    @property
     def other_skills(self):
-        return self.skills.filter(description__iexact="")
+        return self.skills.other_skills

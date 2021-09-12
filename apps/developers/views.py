@@ -16,4 +16,7 @@ def single_profile(request, username):
         profile = Profile.objects.get(user__username__iexact=username)
     except ObjectDoesNotExist:
         return HttpResponse("Profile Not Created Yet")
-    return render(request=request, template_name="developers/profile.html", context={"profile": profile})
+    context = {
+        "profile": profile,
+    }
+    return render(request=request, template_name="developers/profile.html", context=context)

@@ -45,14 +45,16 @@
               </div>
             {% endfor %}
 
-              <h3 class="devInfo__subtitle">Other Skills</h3>
-              <div class="devInfo__otherSkills">
+              {% if profile.other_skills %}
+                  <h3 class="devInfo__subtitle">Other Skills</h3>
+                  <div class="devInfo__otherSkills">
                 {% for other_skill in profile.other_skills %}
                     <span class="tag tag--pill tag--sub tag--lg">
                   <small>{{ other_skill }}</small>
                 </span>
                 {% endfor %}
               </div>
+              {% endif %}
             </div>
           </div>
           <div class="devInfo">
