@@ -7,6 +7,7 @@ class ProfileModelAdmin(admin.ModelAdmin):
     list_display = ("uuid", "get_username", "get_email", "github", "linkedin", "short_intro", "location")
     list_display_links = ("uuid", "get_username", "get_email", "linkedin")
     list_editable = ("short_intro", "location")
+    search_fields = ("uuid", "user__username", "user__first_name", "user__last_name", "user__email")
     list_select_related = ("user", )
 
     def get_username(self, obj):
