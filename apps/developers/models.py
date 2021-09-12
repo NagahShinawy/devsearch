@@ -55,7 +55,7 @@ class Profile(
         return {website: url for website, url in links.items() if url}
 
     def base_skills(self):
-        return self.skills.base_skills
+        return self.skills.base
 
     def other_skills(self):
-        return self.skills.other_skills
+        return self.skills.others
