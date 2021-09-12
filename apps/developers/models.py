@@ -49,4 +49,4 @@ class Profile(
             "facebook": self.facebook,
             "globe": self.website,
         }
-        return {key: value for key, value in links.items() if value}
+        return {website: url for website, url in links.items() if url}

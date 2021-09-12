@@ -15,7 +15,7 @@
             <div class="card__body dev">
               <img class="avatar avatar--xl" src="{{ profile.image_url }}" />
               <h2 class="dev__name">{{ profile.user.first_name }} {{ profile.user.last_name }}</h2>
-              <p class="dev__title">{{ profile.short_intro }}</p>
+              <p class="dev__title">{{ profile.short_intro|slice:"60" }}</p>
               <p class="dev__location">{{ profile.location }}</p>
 
               {% include 'developers/_partials/socails.html' with profile=profile %}
@@ -28,7 +28,7 @@
           <div class="devInfo">
             <h3 class="devInfo__title">About Me</h3>
             <p class="devInfo__about">
-                {{ profile.boi }}
+                {{ profile.boi|slice:"150" }}
               <br />
 
             </p>
