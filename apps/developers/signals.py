@@ -39,5 +39,7 @@ def create_profile(sender, instance, created, **kwargs):
 
 @receiver(post_delete, sender=Profile, dispatch_uid="delete_profile")
 def delete_profile(sender, instance, **kwargs):
-    User.objects.filter(username__iexact=instance.user.username).delete()
-    logger.info(f"profile <{instance}> with user <{instance.user}> has been delete")
+    user = instance.user
+    if user:
+        user.delete()
+        logger.info(f"profile <{instance}> with user <{instance.user}> has been delete")
