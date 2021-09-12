@@ -17,6 +17,8 @@ class Project(UUIDMixin, InfoMixin, SlugMixin, TimestampMixin, ImageModelMixin):
     NEGATIVE = "Negative"
     VOTE = "Vote"
     VOTES = "Votes"
+    IMAGE_URL = "/static/images/default.jpg"
+
     owner = models.ForeignKey(Profile, on_delete=models.CASCADE, related_name="projects", null=True, blank=True)
     source_link = models.URLField(null=True, blank=True, verbose_name=_("Source Link"))
     demo_link = models.URLField(null=True, blank=True, verbose_name=_("Demo Link"))

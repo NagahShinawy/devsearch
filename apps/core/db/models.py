@@ -48,6 +48,8 @@ class InfoMixin(models.Model):
 
 
 class ImageModelMixin(models.Model):
+    IMAGE_URL = ""
+
     image = models.ImageField(
         upload_to=model_directory, blank=True, null=True, verbose_name=_("image")
     )
@@ -60,7 +62,7 @@ class ImageModelMixin(models.Model):
         try:
             return self.image.url
         except (TypeError, ValueError, AttributeError):
-            return str()
+            return self.IMAGE_URL
 
     @property
     def image_name(self):

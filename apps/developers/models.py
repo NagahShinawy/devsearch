@@ -24,7 +24,7 @@ class Skill(InfoMixin, TimestampMixin, models.Model):
 class Profile(
     UUIDMixin, ImageModelMixin, SocialMediaLinksMixin, TimestampMixin, models.Model
 ):
-    DEFAULT_PROFILE_IMAGE = "/static/images/profile-pics/user-default.png"
+    IMAGE_URL = "/static/images/profile-pics/user-default.png"
 
     user = models.OneToOneField(
         User, on_delete=models.CASCADE, related_name="profile", null=True, blank=True
@@ -36,12 +36,6 @@ class Profile(
 
     def __str__(self):
         return self.user.username
-
-    def image_url(self):
-        img = super().image_url
-        if not img:
-            return self.DEFAULT_PROFILE_IMAGE
-        return img
 
     def social_links(self):
         links = {
