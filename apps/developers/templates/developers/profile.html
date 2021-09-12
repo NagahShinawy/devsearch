@@ -58,9 +58,10 @@
             </div>
           </div>
           <div class="devInfo">
-            <h3 class="devInfo__title">Projects</h3>
-            <div class="grid grid--two">
-              {% for project in profile.projects.all %}
+            {% if profile.projects.all %}
+                <h3 class="devInfo__title">Projects</h3>
+                <div class="grid grid--two">
+                    {% for project in profile.projects.all %}
                     <div class="column">
                 <div class="card project">
                   <a href="{% url 'projects:project' uuid=project.uuid %}" class="project">
@@ -85,7 +86,8 @@
               </div>
               {% endfor %}
 
-            </div>
+                </div>
+            {% endif %}
           </div>
         </div>
       </div>

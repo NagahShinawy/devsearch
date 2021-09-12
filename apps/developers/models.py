@@ -32,7 +32,7 @@ class Profile(
     short_intro = models.CharField(max_length=256, null=True, blank=True)
     location = models.CharField(max_length=256, null=True, blank=True)
     boi = models.TextField(max_length=256, null=True, blank=True)
-    skills = models.ManyToManyField(Skill, related_name="profile")
+    skills = models.ManyToManyField(Skill, related_name="profile", null=True, blank=True)
 
     def __str__(self):
         return self.user.username
@@ -53,3 +53,6 @@ class Profile(
 
     def other_skills(self):
         return self.skills.others
+
+    class Meta:
+        ordering = ["-created"]

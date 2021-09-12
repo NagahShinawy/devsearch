@@ -1,6 +1,7 @@
 import logging
 import os
-from django.db.models.signals import post_delete, post_save
+from django.contrib.auth.models import User
+from django.db.models.signals import post_delete, post_save, pre_save
 from django.dispatch import receiver
 from .models import Profile
 
@@ -23,3 +24,20 @@ def profile_updated_created(sender, instance, created, **kwargs):
         print("CREATED")
     else:
         print("UPDATED")
+
+
+@receiver(post_save, sender=User, dispatch_uid="create_profile")
+def create_profile(sender, instance, created, **kwargs):
+    updated = not created
+    if updated:
+        return
+
+    profile = Profile(user=instance)
+    profile.save()
+    logger.info(f"profile <{profile}> with user <{instance}> has been created")
+
+
+@receiver(post_delete, sender=Profile, dispatch_uid="delete_profile")
+def delete_profile(sender, instance, **kwargs):
+    User.objects.filter(username__iexact=instance.user.username).delete()
+    logger.info(f"profile <{instance}> with user <{instance.user}> has been delete")

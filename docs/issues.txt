@@ -1,3 +1,11 @@
 <class 'apps.projects.admin.ProjectModelAdmin'>: (admin.E109) The value of 'list_display[6]' must not be a ManyToManyField.
 
 
+==========================
+
+profile = Profile(user=instance)
+    profile.save()
+
+Although skills is required, but i could created new profile without skills. Why ?!
+
+
