@@ -7,5 +7,4 @@ class DevelopersConfig(AppConfig):
     name = "apps.developers"
 
     def ready(self):
-        import_module("apps.core.signals")
         import_module("apps.developers.signals")
