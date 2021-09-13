@@ -22,10 +22,8 @@ def login(request):
         return render(request=request, template_name="accounts/login.html")
 
 
-
 def logout(request):
-    if request.user.is_authenticated:
-        auth.logout(request)
+    auth.logout(request)
     return redirect("accounts:login")
 
 
