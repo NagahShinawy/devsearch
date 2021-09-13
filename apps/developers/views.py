@@ -1,4 +1,5 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render
+from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse
 from django.core.exceptions import ObjectDoesNotExist
 from .models import Profile
@@ -9,9 +10,8 @@ def index(request):
     return render(request, "developers/profiles.html", {"profiles": profiles})
 
 
+@login_required
 def single_profile(request, username):
-    if request.user.is_anonymous:
-        return redirect("accounts:login")
     try:
         profile = Profile.objects.get(user__username__iexact=username)
     except ObjectDoesNotExist:

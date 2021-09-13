@@ -1,5 +1,4 @@
 from django.shortcuts import render, redirect
-from django.http import HttpResponse
 from django.contrib import auth, messages
 from apps.core.constants.messages import InvalidCredentialsMessage
 
@@ -9,6 +8,9 @@ def signup(request):
 
 
 def login(request):
+    if request.user.is_authenticated:
+        return redirect("developers:index")
+
     if request.method != 'POST':
         return render(request=request, template_name="accounts/login.html")
     username = request.POST.get("username")
