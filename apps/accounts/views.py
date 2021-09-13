@@ -1,10 +1,18 @@
 from django.shortcuts import render, redirect
 from django.contrib import auth, messages
 from apps.core.constants.messages import InvalidCredentialsMessage
+from .forms import ProfileCreationForm
 
 
 def signup(request):
-    return render(request=request, template_name="accounts/signup.html")
+    form = ProfileCreationForm()
+    if request.method == "POST":
+        form = ProfileCreationForm(request.POST)
+        if form.is_valid():
+            form.save()
+            auth.login(request, user=form.instance)
+            return redirect("developers:index")
+    return render(request=request, template_name="accounts/signup.html", context={"form": form})
 
 
 def login(request):
