@@ -6,10 +6,10 @@ from .forms import ProjectModelForm
 from apps.core import utils
 
 
-def projects(request):
-    projs = Project.objects.all()
+def list_projects(request):
+    projects = Project.objects.all()
     return render(
-        request, template_name="projects/projects.html", context={"projects": projs}
+        request, template_name="projects/projects.html", context={"projects": projects}
     )
 
 
