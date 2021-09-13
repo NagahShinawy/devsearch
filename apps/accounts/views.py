@@ -1,9 +1,7 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.http import HttpResponse
-
-
-def profile(request):
-    return render(request=request, template_name="accounts/profile.html")
+from django.contrib import auth, messages
+from apps.core.constants.messages import InvalidCredentialsMessage
 
 
 def signup(request):
@@ -11,11 +9,21 @@ def signup(request):
 
 
 def login(request):
+    username = request.POST.get("username")
+    password = request.POST.get("password")
+    user = auth.authenticate(request, username=username, password=password)
+    if user:
+        auth.login(request, user)
+        return redirect("developers:index")
+    else:
+        messages.error(request, InvalidCredentialsMessage.text)
     return render(request=request, template_name="accounts/login.html")
 
 
 def logout(request):
-    return HttpResponse("You are logged out")
+    if request.user.is_authenticated:
+        auth.logout(request)
+    return redirect("accounts:login")
 
 
 def forgetpassword(request):
