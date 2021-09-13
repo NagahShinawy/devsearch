@@ -58,8 +58,10 @@
               </div>
               <input class="btn btn--sub btn--lg" type="submit" value="Comments" />
             </form>
-              <a id="delete" href="{% url 'projects:delete' project.uuid %}"><input id="delete-btn" class="btn btn--sub btn--lg" type="submit" value="Delete" /></a>
-              <a id="update" href="{% url 'projects:update' project.uuid %}"><input id="update-btn" class="btn btn--sub btn--lg" type="submit" value="Update" /></a>
+              {% if project.owner.user == request.user %}
+                    <a id="delete" href="{% url 'projects:delete' project.uuid %}"><input id="delete-btn" class="btn btn--sub btn--lg" type="submit" value="Delete" /></a>
+                    <a id="update" href="{% url 'projects:update' project.uuid %}"><input id="update-btn" class="btn btn--sub btn--lg" type="submit" value="Update" /></a>
+              {% endif %}
             <div class="commentList">
               <div class="comment">
                 <a href="{% url 'developers:profile' project.owner %}">

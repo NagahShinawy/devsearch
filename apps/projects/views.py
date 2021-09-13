@@ -44,10 +44,13 @@ def create_project(request):
 def delete_project(request, uuid):
     project = utils.get_object_or_404(model=Project, uuid=uuid)
 
+    if project.owner.user != request.user:
+        return redirect("developers:index")
+
     if project is False:
         return HttpResponse("Not Found")
 
-    if request.method == "POST":
+    if request.method == "POST" and project.owner.user == request.user:
         project.delete()
         return redirect("projects:projects")
     return render(
@@ -58,12 +61,14 @@ def delete_project(request, uuid):
 @login_required
 def update_project(request, uuid):
     project = utils.get_object_or_404(model=Project, uuid=uuid)
+    if project.owner.user != request.user:
+        return redirect("developers:index")
 
     if project is False:
         return HttpResponse("Not Found")
 
     form = ProjectModelForm(instance=project)
-    if request.method == "POST":
+    if request.method == "POST" and project.owner.user == request.user:
         form = ProjectModelForm(
             data=request.POST, instance=project, files=request.FILES
         )
