@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from django.contrib import auth, messages
-from apps.core.constants.messages import InvalidCredentialsMessage
+from django.contrib.auth.models import User
+from apps.core.constants.messages import InvalidCredentialsMessage, AlreadyExistMessage
 from .forms import ProfileCreationForm
 
 
@@ -9,7 +10,11 @@ def signup(request):
     if request.method == "POST":
         form = ProfileCreationForm(request.POST)
         if form.is_valid():
-            form.save()
+            user = form.save(commit=True)
+            if User.objects.filter(username__iexact=user.username).exists():
+                messages.error(request, AlreadyExistMessage.text)
+                return render(request=request, template_name="accounts/signup.html")
+            user.save()
             auth.login(request, user=form.instance)
             return redirect("developers:index")
     return render(request=request, template_name="accounts/signup.html", context={"form": form})

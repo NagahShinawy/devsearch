@@ -13,7 +13,7 @@
           <h3>Account SignUp</h3>
           <p>Create a new developer account</p>
         </div>
-
+        {% include '_partials/message.html' %}
         <form action="{% url 'accounts:signup' %}" class="form auth__form" method="POST">
             {% csrf_token %}
           <div class="form__field">
@@ -24,6 +24,7 @@
               type="text"
               name="username"
               placeholder="e.g. Dennis"
+              required
             />
           </div>
           <!-- Input:Text -->
@@ -35,6 +36,7 @@
               type="text"
               name="first_name"
               placeholder="e.g. Dennis"
+              required
             />
           </div>
 
@@ -46,6 +48,7 @@
               type="text"
               name="last_name"
               placeholder="e.g. Ivanov"
+              required
             />
           </div>
 
@@ -58,6 +61,7 @@
               type="email"
               name="email"
               placeholder="e.g. user@domain.com"
+              required
             />
           </div>
 
@@ -70,6 +74,7 @@
               type="password"
               name="password1"
               placeholder="••••••••"
+              required
             />
           </div>
           <!-- Input:Password -->
@@ -81,6 +86,7 @@
               type="password"
               name="password2"
               placeholder="••••••••"
+              required
             />
           </div>
           <div class="auth__actions">
