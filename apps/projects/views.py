@@ -31,6 +31,9 @@ def create_project(request):
     if request.method == "POST":
         project_form = ProjectModelForm(data=request.POST, files=request.FILES)
         if project_form.is_valid():
+            project = project_form.instance
+            project.owner = request.user.profile
+            project.save()
             project_form.save()
             return redirect("projects:projects")
     return render(
