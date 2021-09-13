@@ -9,6 +9,8 @@ def signup(request):
 
 
 def login(request):
+    if request.method != 'POST':
+        return render(request=request, template_name="accounts/login.html")
     username = request.POST.get("username")
     password = request.POST.get("password")
     user = auth.authenticate(request, username=username, password=password)
@@ -17,7 +19,8 @@ def login(request):
         return redirect("developers:index")
     else:
         messages.error(request, InvalidCredentialsMessage.text)
-    return render(request=request, template_name="accounts/login.html")
+        return render(request=request, template_name="accounts/login.html")
+
 
 
 def logout(request):
