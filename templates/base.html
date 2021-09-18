@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+{% load static %}
 
 {% include '_partials/head.html' %}
 
@@ -12,6 +13,7 @@
   <!-- Main Section -->
   {% block main %}
   {% endblock main %}
+  <script src="{% static 'uikit/app.js' %}"></script>
 </body>
 
 </html>
