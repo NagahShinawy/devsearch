@@ -1,4 +1,4 @@
-user_creation_form_fields_style = [
+fields_style = [
     {
         "field_name": "username",
         "attrs": {
