@@ -10,7 +10,7 @@ def signup(request):
     if request.method == "POST":
         form = ProfileCreationForm(request.POST)
         if form.is_valid():
-            user = form.save(commit=True)
+            user = form.save(commit=False)
             if User.objects.filter(username__iexact=user.username).exists():
                 messages.error(request, AlreadyExistMessage.text)
                 return render(request=request, template_name="accounts/signup.html")

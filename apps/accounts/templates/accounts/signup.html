@@ -19,7 +19,12 @@
         {% endif %}
         <form action="{% url 'accounts:signup' %}" class="form auth__form" method="POST">
             {% csrf_token %}
-            {{ form.as_p }}
+            {% for field in form %}
+                <div class="form__field">
+                    <label for="formInput#text">{{ field.label }}: </label>
+                </div>
+                {{ field }}
+            {% endfor %}
           <div class="auth__actions">
             <input class="btn btn--sub btn--lg" type="submit" value="Sign  Up" />
           </div>
