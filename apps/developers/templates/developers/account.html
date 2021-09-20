@@ -34,7 +34,7 @@
           </div>
 
           <table class="settings__table">
-              {% for skill in profile.base_skills|slice:"5" %}
+              {% for skill in profile.skills.all%}
                     <tr>
                         <td class="settings__tableInfo">
                             <h4>{{ skill }}</h4>
