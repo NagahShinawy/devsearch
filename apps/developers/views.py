@@ -19,4 +19,4 @@ def single_profile(request, username):
     context = {
         "profile": profile,
     }
-    return render(request=request, template_name="developers/profile.html", context=context)
+    return render(request=request, template_name="developers/account.html", context=context)
