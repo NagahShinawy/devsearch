@@ -19,4 +19,6 @@ def single_profile(request, username):
     context = {
         "profile": profile,
     }
-    return render(request=request, template_name="developers/account.html", context=context)
+    if profile.user == request.user:
+        return render(request=request, template_name="developers/account.html", context=context)
+    return render(request=request, template_name="developers/profile.html", context=context)
