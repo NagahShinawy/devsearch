@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+
+{% block main %}
+
+    <h1>Edit Account</h1>
+    <form action="{% url 'developers:edit-profile' %}">
+            {% csrf_token %}
+            {% for field in form %}
+                    {{ field.label }}<br>
+                    {{ field }}
+            {% endfor %}
+            <input type="submit" value="Save" />
+    </form>
+{% endblock %}

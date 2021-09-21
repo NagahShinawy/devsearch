@@ -3,6 +3,7 @@ from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse
 from django.core.exceptions import ObjectDoesNotExist
 from .models import Profile
+from .forms import ProfileModelForm
 
 
 def index(request):
@@ -22,3 +23,17 @@ def single_profile(request, username):
     if profile.user == request.user:
         return render(request=request, template_name="developers/account.html", context=context)
     return render(request=request, template_name="developers/profile.html", context=context)
+
+
+@login_required
+def edit_profile(request):
+    profile = request.user.profile
+    form = ProfileModelForm(instance=profile)
+    if request.method != "POST":
+        return render(request=request, template_name="developers/profile_form.html", context={"form": form})
+
+    form = ProfileModelForm(data=request.POST, instance=profile, files=request.FILES)
+    if form.is_valid():
+        form.save()
+    return render(request=request, template_name="developers/account.html", context={"profile": profile})
+
