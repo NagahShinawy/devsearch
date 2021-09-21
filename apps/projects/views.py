@@ -35,7 +35,7 @@ def create_project(request):
             project.owner = request.user.profile
             project.save()
             project_form.save()
-            return redirect("projects:projects")
+            return redirect("developers:profile", username=request.user.username)
     return render(
         request,
         template_name="projects/form-template.html",
@@ -45,7 +45,8 @@ def create_project(request):
 
 @login_required
 def delete_project(request, uuid):
-    project = utils.get_object_or_404(model=Project, uuid=uuid)
+    # project = utils.get_object_or_404(model=Project, uuid=uuid)
+    project = request.user.profile.projects.get(uuid=uuid)
 
     if project.owner.user != request.user:
         return redirect("developers:index")
@@ -55,7 +56,7 @@ def delete_project(request, uuid):
 
     if request.method == "POST" and project.owner.user == request.user:
         project.delete()
-        return redirect("projects:projects")
+        return redirect("developers:profile", username=request.user.username)
     return render(
         request, template_name="projects/delete.html", context={"project": project}
     )
@@ -63,7 +64,8 @@ def delete_project(request, uuid):
 
 @login_required
 def update_project(request, uuid):
-    project = utils.get_object_or_404(model=Project, uuid=uuid)
+    # project = utils.get_object_or_404(model=Project, uuid=uuid)
+    project = request.user.profile.projects.get(uuid=uuid)
     if project.owner.user != request.user:
         return redirect("developers:index")
 
@@ -77,7 +79,7 @@ def update_project(request, uuid):
         )
         if form.is_valid():
             form.save()
-            return redirect("projects:projects")
+            return redirect("developers:profile", username=request.user.username)
     return render(
         request,
         template_name="projects/form-template.html",
