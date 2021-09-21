@@ -4,12 +4,9 @@
 {% block main %}
 
     <h1>Edit Account</h1>
-    <form action="{% url 'developers:edit-profile' %}">
+    <form action="{% url 'developers:edit-profile' %}" method="POST">
             {% csrf_token %}
-            {% for field in form %}
-                    {{ field.label }}<br>
-                    {{ field }}
-            {% endfor %}
+            {{ form.as_p }}
             <input type="submit" value="Save" />
     </form>
 {% endblock %}

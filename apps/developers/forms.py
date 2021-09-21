@@ -1,12 +1,10 @@
-from django.forms import models
+from django import forms
 from .models import Profile
 
 
-class ProfileModelForm(models.ModelForm):
+class ProfileModelForm(forms.ModelForm):
+    username = forms.CharField(max_length=256)
+
     class Meta:
         model = Profile
-        fields = (
-            "__all__"
-        )
         exclude = ("user", )
-        labels = {"first_name": "Your First Name"}

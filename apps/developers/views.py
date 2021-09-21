@@ -34,6 +34,10 @@ def edit_profile(request):
 
     form = ProfileModelForm(data=request.POST, instance=profile, files=request.FILES)
     if form.is_valid():
+        profile = form.save(commit=False)
+        username = form.cleaned_data["username"]
+        profile.user.username = username
+        profile.user.save()
         form.save()
     return render(request=request, template_name="developers/account.html", context={"profile": profile})
 

@@ -43,3 +43,8 @@ def delete_profile(sender, instance, **kwargs):
     if user:
         user.delete()
         logger.info(f"profile <{instance}> with user <{instance.user}> has been delete")
+
+    if not instance.image:
+        return
+    os.remove(instance.image.path)
+    logger.info(f"image <{instance.image}> of <{instance}> for {sender} was deleted")
