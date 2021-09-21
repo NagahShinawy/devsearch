@@ -7,4 +7,27 @@ class ProfileModelForm(forms.ModelForm):
 
     class Meta:
         model = Profile
-        exclude = ("user", )
+        fields = (
+            "username",
+            "image",
+            "facebook",
+            "twitter",
+            "github",
+            "linkedin",
+            "stackoverflow",
+            "youtube",
+            "website",
+            "short_intro",
+            "location",
+            "boi",
+            "skills",
+        )
+
+        exclude = ("user",)
+        widgets = {"skills": forms.CheckboxSelectMultiple}
+
+    def __init__(self, *args, **kwargs):
+        super(ProfileModelForm, self).__init__(*args, **kwargs)
+        # self.fields["title"].widget.attrs.update({"class": "input input--text", "placeholder": "Enter Title"})
+        for name, _ in self.fields.items():
+            self.fields[name].widget.attrs.update({"class": "input"})

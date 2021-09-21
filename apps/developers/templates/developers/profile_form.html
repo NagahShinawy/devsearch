@@ -3,10 +3,24 @@
 
 {% block main %}
 
-    <h1>Edit Account</h1>
-    <form action="{% url 'developers:edit-profile' %}" method="POST" enctype="multipart/form-data">
-            {% csrf_token %}
-            {{ form.as_p }}
-            <input type="submit" value="Save" />
-    </form>
+  <main class="formPage my-xl">
+        <div class="content-box">
+            <div class="formWrapper">
+                <a class="backButton" href="{% url 'developers:profile' username=request.user.username %}"><i class="im im-angle-left"></i></a>
+                <br>
+
+                <form class="form" method="POST" action="{% url 'developers:edit-profile' %}" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    {% for field in form %}
+                        <div class="form__field">
+                        <label for="formInput#text">{{ field.label }}</label>
+                        {{ field }}
+                    </div>
+                    {% endfor %}
+                    <input class="btn btn--sub btn--lg  my-md" type="submit" value="Submit">
+                </form>
+            </div>
+        </div>
+    </main>
+
 {% endblock %}
