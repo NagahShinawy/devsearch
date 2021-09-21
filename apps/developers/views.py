@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse
 from django.core.exceptions import ObjectDoesNotExist
@@ -21,23 +21,34 @@ def single_profile(request, username):
         "profile": profile,
     }
     if profile.user == request.user:
-        return render(request=request, template_name="developers/account.html", context=context)
-    return render(request=request, template_name="developers/profile.html", context=context)
+        return render(
+            request=request, template_name="developers/account.html", context=context
+        )
+    return render(
+        request=request, template_name="developers/profile.html", context=context
+    )
 
 
 @login_required
 def edit_profile(request):
     profile = request.user.profile
-    form = ProfileModelForm(instance=profile)
+    form = ProfileModelForm(instance=profile, initial={"username": profile.user.username})
     if request.method != "POST":
-        return render(request=request, template_name="developers/profile_form.html", context={"form": form})
+        return render(
+            request=request,
+            template_name="developers/profile_form.html",
+            context={"form": form},
+        )
 
-    form = ProfileModelForm(data=request.POST, instance=profile, files=request.FILES)
+    form = ProfileModelForm(
+        data=request.POST,
+        instance=profile,
+        files=request.FILES,
+    )
     if form.is_valid():
         profile = form.save(commit=False)
         username = form.cleaned_data["username"]
         profile.user.username = username
         profile.user.save()
         form.save()
-    return render(request=request, template_name="developers/account.html", context={"profile": profile})
-
+    return redirect("developers:profile", username=profile.user.username)

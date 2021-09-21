@@ -16,7 +16,7 @@ def signup(request):
                 return render(request=request, template_name="accounts/signup.html")
             user.save()
             auth.login(request, user=form.instance)
-            return redirect("developers:index")
+            return redirect("developers:edit-profile")
     return render(request=request, template_name="accounts/signup.html", context={"form": form})
 
 
