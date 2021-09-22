@@ -9,6 +9,15 @@ __pycache__/
 # Distribution / packaging
 .Python
 /.idea/
+.idea/
+
+## File-based project format:
+*.iws
+
+## Plugin-specific files:
+
+# mpeltonen/sbt-idea plugin
+.idea_modules/
 build/
 develop-eggs/
 dist/
@@ -112,6 +121,7 @@ env.bak/
 venv.bak/
 venv-devearch/
 .idea/
+
 
 # Spyder project settings
 .spyderproject
