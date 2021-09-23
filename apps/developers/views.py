@@ -4,7 +4,11 @@ from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django.http import HttpResponse
 from django.core.exceptions import ObjectDoesNotExist
-from apps.core.constants.messages import SkillAddedSuccessfully
+from apps.core.constants.messages import (
+    SkillAddedSuccessfully,
+    SkillUpdatedSuccessfully,
+    SkillDeletedSuccessfully,
+)
 from .models import Profile, Skill
 from .forms import ProfileModelForm, SKillModelForm
 
@@ -95,6 +99,7 @@ def edit_skill(request, username, slug):
         form = SKillModelForm(data=request.POST, instance=skill)
         if form.is_valid():
             form.save()
+            messages.success(request, SkillUpdatedSuccessfully.text)
             return redirect("developers:profile", username=request.user.username)
 
     return render(
@@ -112,6 +117,7 @@ def delete_skill(request, username, slug):
     if request.method == "POST":
         profile = user.profile
         profile.skills.remove(skill)
+        messages.success(request, SkillDeletedSuccessfully.text)
         return redirect("developers:profile", username=request.user.username)
 
     return render(

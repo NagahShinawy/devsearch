@@ -11,4 +11,12 @@ class AlreadyExistMessage(Message):
 
 
 class SkillAddedSuccessfully(Message):
-    text = "Skill Was Added Successfully "
+    text = "Skill Was Added Successfully"
+
+
+class SkillUpdatedSuccessfully(Message):
+    text = "Skill Was Updated"
+
+
+class SkillDeletedSuccessfully(Message):
+    text = "Skill Was Deleted"
