@@ -1,9 +1,10 @@
+from django.contrib.auth.models import User
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse
 from django.core.exceptions import ObjectDoesNotExist
 from .models import Profile
-from .forms import ProfileModelForm
+from .forms import ProfileModelForm, SKillModelForm
 
 
 def index(request):
@@ -52,3 +53,23 @@ def edit_profile(request):
         profile.user.save()
         form.save()
     return redirect("developers:profile", username=profile.user.username)
+
+
+@login_required
+def add_skill(request, username):
+    user = User.objects.get(username__iexact=username)
+    if user != request.user:
+        return redirect('developers:profile', username=username)
+
+    form = SKillModelForm()
+
+    if request.method == "POST":
+        form = SKillModelForm(request.POST or None)
+        if form.is_valid():
+            form.save()
+            profile = request.user.profile
+            skill = form.instance
+            profile.skills.add(skill)
+            return redirect("developers:profile", username=profile.user.username)
+
+    return render(request=request, template_name="developers/add_skill.html", context={"form": form})
