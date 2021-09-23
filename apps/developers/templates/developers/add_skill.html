@@ -7,7 +7,12 @@
             <div class="formWrapper">
                 <a class="backButton" href="{% url 'developers:profile' username=request.user.username %}"><i class="im im-angle-left"></i></a>
                 <br>
-                 <h5>Add Skill</h5>
+                {% if 'add_skill' in request.path %}
+                    <h5>Add Skill</h5>
+                {% elif 'edit_skill' in request.path %}
+                    <h5>Edit Skill</h5>
+                {% endif %}
+
                 <form class="form" method="POST" action="." enctype="multipart/form-data">
                     {% csrf_token %}
                     {% for field in form %}

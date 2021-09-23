@@ -43,8 +43,8 @@
                 </p>
               </td>
                         <td class="settings__tableActions">
-                <a class="tag tag--pill tag--main settings__btn" href="{% url 'developers:edit_skill' username=request.user.username skill_title=skill.title %}"><i class="im im-edit"></i> Edit</a>
-                <a class="tag tag--pill tag--main settings__btn" href="{% url 'developers:delete_skill' username=request.user.username skill_title=skill.title %}"><i class="im im-x-mark-circle-o"></i>
+                <a class="tag tag--pill tag--main settings__btn" href="{% url 'developers:edit_skill' username=request.user.username slug=skill.slug %}"><i class="im im-edit"></i> Edit</a>
+                <a class="tag tag--pill tag--main settings__btn" href="{% url 'developers:delete_skill' username=request.user.username slug=skill.slug %}"><i class="im im-x-mark-circle-o"></i>
                   Delete</a>
               </td>
                     </tr>

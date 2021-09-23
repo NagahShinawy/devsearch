@@ -7,10 +7,11 @@ from apps.core.db.models import (
     SocialMediaLinksMixin,
     TimestampMixin,
     InfoMixin,
+    SlugMixin,
 )
 
 
-class Skill(InfoMixin, TimestampMixin, models.Model):
+class Skill(InfoMixin, SlugMixin, TimestampMixin, models.Model):
 
     objects = SkillManager()
 
@@ -32,7 +33,9 @@ class Profile(
     short_intro = models.CharField(max_length=256, null=True, blank=True)
     location = models.CharField(max_length=256, null=True, blank=True)
     boi = models.TextField(max_length=256, null=True, blank=True)
-    skills = models.ManyToManyField(Skill, related_name="profile", null=True, blank=True)
+    skills = models.ManyToManyField(
+        Skill, related_name="profile", null=True, blank=True
+    )
 
     def __str__(self):
         return self.user.username

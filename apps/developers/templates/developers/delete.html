@@ -10,9 +10,9 @@
                 <a class="backButton" href="{% url "developers:profile" username=request.user.username %}"><i class="im im-angle-left"></i></a>
                 <br>
 
-                <form class="form" method="POST" action="{% url 'developers:delete_skill' username=request.user.username skill_title=skill.title %}">
+                <form class="form" method="POST" action="{% url 'developers:delete_skill' username=request.user.username slug=skill.slug %}">
                     {% csrf_token %}
-                    <p>Are your sure you want to delete this "{{ skill }}"?</p>
+                    <p>Are your sure you want to delete this "{{ skill.title }}"?</p>
                     <a class="btn btn--sub btn--lg  my-md" href="{% url "developers:profile" username=request.user.username %}">&#x2190 Go Back</a>
                     <input id="confirm-delete-btn" class="btn btn--sub btn--lg  my-md" type="submit" value="Delete" />
                 </form>

@@ -1,9 +1,11 @@
 import logging
 import os
 from django.contrib.auth.models import User
-from django.db.models.signals import post_delete, post_save
+from django.db.models.signals import post_delete, post_save, pre_save
 from django.dispatch import receiver
-from .models import Profile
+from django.utils.text import slugify
+
+from .models import Profile, Skill
 
 logger = logging.getLogger(__name__)
 
@@ -48,3 +50,12 @@ def delete_profile(sender, instance, **kwargs):
         return
     os.remove(instance.image.path)
     logger.info(f"image <{instance.image}> of <{instance}> for {sender} was deleted")
+
+
+@receiver(pre_save, sender=Skill, dispatch_uid="add_skill_slug")
+def add_skill_slug(sender, instance, **kwargs):
+    skill = instance
+    old_title = instance.title
+    slug = slugify(skill.title)
+    skill.slug = slug
+    logger.info(f"title <{old_title}> was update to <{skill}> of {sender}")

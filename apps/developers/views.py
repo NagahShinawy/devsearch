@@ -69,6 +69,7 @@ def add_skill(request, username):
                 skill = skills.first()
             else:
                 skill = form.instance
+                form.save()
             profile.skills.add(skill)
             return redirect("developers:profile", username=profile.user.username)
 
@@ -80,11 +81,11 @@ def add_skill(request, username):
 
 
 @login_required
-def edit_skill(request, username, skill_title):
+def edit_skill(request, username, slug):
     user = get_object_or_404(User, username__iexact=username)
     if user != request.user:
         return redirect("developers:profile", username=username)
-    skill = get_object_or_404(Skill, title=skill_title)
+    skill = get_object_or_404(Skill, slug=slug)
     form = SKillModelForm(instance=skill)
 
     if request.method == "POST":
@@ -100,11 +101,11 @@ def edit_skill(request, username, skill_title):
     )
 
 
-def delete_skill(request, username, skill_title):
+def delete_skill(request, username, slug):
     user = get_object_or_404(User, username__iexact=username)
     if user != request.user:
         return redirect("developers:profile", username=username)
-    skill = get_object_or_404(Skill, title=skill_title)
+    skill = get_object_or_404(Skill, slug=slug)
     if request.method == "POST":
         profile = user.profile
         profile.skills.remove(skill)
