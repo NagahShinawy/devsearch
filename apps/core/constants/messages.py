@@ -8,3 +8,7 @@ class InvalidCredentialsMessage(Message):
 
 class AlreadyExistMessage(Message):
     text = "username already exist"
+
+
+class SkillAddedSuccessfully(Message):
+    text = "Skill Was Added Successfully "

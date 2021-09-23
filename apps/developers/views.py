@@ -1,8 +1,10 @@
 from django.contrib.auth.models import User
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
+from django.contrib import messages
 from django.http import HttpResponse
 from django.core.exceptions import ObjectDoesNotExist
+from apps.core.constants.messages import SkillAddedSuccessfully
 from .models import Profile, Skill
 from .forms import ProfileModelForm, SKillModelForm
 
@@ -71,6 +73,7 @@ def add_skill(request, username):
                 skill = form.instance
                 form.save()
             profile.skills.add(skill)
+            messages.success(request, SkillAddedSuccessfully.text)
             return redirect("developers:profile", username=profile.user.username)
 
     return render(
@@ -111,4 +114,8 @@ def delete_skill(request, username, slug):
         profile.skills.remove(skill)
         return redirect("developers:profile", username=request.user.username)
 
-    return render(request=request, template_name="developers/delete.html", context={"skill": skill})
+    return render(
+        request=request,
+        template_name="developers/delete.html",
+        context={"skill": skill},
+    )
