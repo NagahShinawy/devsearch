@@ -1,14 +1,16 @@
-from django.db import models
 from django.contrib.auth.models import User
-from .managers import SkillManager
+from django.db import models
+
 from apps.core.db.models import (
-    UUIDMixin,
     ImageModelMixin,
-    SocialMediaLinksMixin,
-    TimestampMixin,
     InfoMixin,
     SlugMixin,
+    SocialMediaLinksMixin,
+    TimestampMixin,
+    UUIDMixin,
 )
+
+from .managers import SkillManager
 
 
 class Skill(InfoMixin, SlugMixin, TimestampMixin, models.Model):

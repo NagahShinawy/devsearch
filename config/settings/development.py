@@ -1,6 +1,6 @@
 import socket
-from .base import *
 
+from .base import *
 
 DEBUG_TOOLBAR_CONFIG = {
     "JQUERY_URL": "",

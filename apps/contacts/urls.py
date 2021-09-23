@@ -1,6 +1,6 @@
 from django.urls import path
-from .views import inbox, message
 
+from .views import inbox, message
 
 app_name = "contacts"
 

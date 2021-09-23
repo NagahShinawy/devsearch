@@ -1,7 +1,10 @@
-from django.shortcuts import render, redirect
 from django.contrib import auth, messages
 from django.contrib.auth.models import User
-from apps.core.constants.messages import InvalidCredentialsMessage, AlreadyExistMessage
+from django.shortcuts import redirect, render
+
+from apps.core.constants.messages import (AlreadyExistMessage,
+                                          InvalidCredentialsMessage)
+
 from .forms import ProfileCreationForm
 
 

@@ -1,16 +1,16 @@
-from django.contrib.auth.models import User
-from django.shortcuts import render, redirect, get_object_or_404
-from django.contrib.auth.decorators import login_required
 from django.contrib import messages
-from django.http import HttpResponse
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.models import User
 from django.core.exceptions import ObjectDoesNotExist
-from apps.core.constants.messages import (
-    SkillAddedSuccessfully,
-    SkillUpdatedSuccessfully,
-    SkillDeletedSuccessfully,
-)
-from .models import Profile, Skill
+from django.http import HttpResponse
+from django.shortcuts import get_object_or_404, redirect, render
+
+from apps.core.constants.messages import (SkillAddedSuccessfully,
+                                          SkillDeletedSuccessfully,
+                                          SkillUpdatedSuccessfully)
+
 from .forms import ProfileModelForm, SKillModelForm
+from .models import Profile, Skill
 
 
 def index(request):

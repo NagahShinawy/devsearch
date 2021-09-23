@@ -1,5 +1,5 @@
-from django.db import models
 from django.core.exceptions import ObjectDoesNotExist
+from django.db import models
 
 
 def from_qs_to_list(qs: models.QuerySet) -> list:

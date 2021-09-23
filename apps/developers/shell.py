@@ -1,6 +1,5 @@
 from django.utils.text import slugify
 
-
 from .models import Skill
 
 

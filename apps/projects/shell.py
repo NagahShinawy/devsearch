@@ -1,6 +1,6 @@
 from django.db.models import Q
 
-from .models import Project, Tag, Review
+from .models import Project, Review, Tag
 
 SEP = 9
 # working with qs of one2Many and ManyToMany

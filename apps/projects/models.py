@@ -1,15 +1,12 @@
 from django.db import models
 from django.utils.translation import gettext_lazy as _
-from apps.core.db.models import (
-    UUIDMixin,
-    InfoMixin,
-    SlugMixin,
-    TimestampMixin,
-    ImageModelMixin,
-)
-from .choices import VoteType
+
 from apps.core import utils
+from apps.core.db.models import (ImageModelMixin, InfoMixin, SlugMixin,
+                                 TimestampMixin, UUIDMixin)
 from apps.developers.models import Profile
+
+from .choices import VoteType
 
 
 class Project(UUIDMixin, InfoMixin, SlugMixin, TimestampMixin, ImageModelMixin):

@@ -1,5 +1,7 @@
 from django.urls import path
-from .views import index, single_profile, edit_profile, add_skill, edit_skill, delete_skill
+
+from .views import (add_skill, delete_skill, edit_profile, edit_skill, index,
+                    single_profile)
 
 app_name = "developers"
 
