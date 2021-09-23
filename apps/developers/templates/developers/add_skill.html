@@ -9,7 +9,7 @@
                 <a class="backButton" href="{% url 'developers:profile' username=request.user.username %}"><i class="im im-angle-left"></i></a>
                 <br>
 
-                <form class="form" method="POST" action="{% url 'developers:add_skill' username=request.user.username %}" enctype="multipart/form-data">
+                <form class="form" method="POST" action="." enctype="multipart/form-data">
                     {% csrf_token %}
                     {% for field in form %}
                         <div class="form__field">

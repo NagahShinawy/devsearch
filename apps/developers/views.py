@@ -1,9 +1,9 @@
 from django.contrib.auth.models import User
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse
 from django.core.exceptions import ObjectDoesNotExist
-from .models import Profile
+from .models import Profile, Skill
 from .forms import ProfileModelForm, SKillModelForm
 
 
@@ -33,7 +33,9 @@ def single_profile(request, username):
 @login_required
 def edit_profile(request):
     profile = request.user.profile
-    form = ProfileModelForm(instance=profile, initial={"username": profile.user.username})
+    form = ProfileModelForm(
+        instance=profile, initial={"username": profile.user.username}
+    )
     if request.method != "POST":
         return render(
             request=request,
@@ -41,11 +43,7 @@ def edit_profile(request):
             context={"form": form},
         )
 
-    form = ProfileModelForm(
-        data=request.POST,
-        instance=profile,
-        files=request.FILES,
-    )
+    form = ProfileModelForm(data=request.POST, instance=profile, files=request.FILES,)
     if form.is_valid():
         profile = form.save(commit=False)
         username = form.cleaned_data["username"]
@@ -57,9 +55,9 @@ def edit_profile(request):
 
 @login_required
 def add_skill(request, username):
-    user = User.objects.get(username__iexact=username)
+    user = get_object_or_404(User, username__iexact=username)
     if user != request.user:
-        return redirect('developers:profile', username=username)
+        return redirect("developers:profile", username=username)
 
     form = SKillModelForm()
 
@@ -72,4 +70,33 @@ def add_skill(request, username):
             profile.skills.add(skill)
             return redirect("developers:profile", username=profile.user.username)
 
-    return render(request=request, template_name="developers/add_skill.html", context={"form": form})
+    return render(
+        request=request,
+        template_name="developers/add_skill.html",
+        context={"form": form},
+    )
+
+
+@login_required
+def edit_skill(request, username, skill_title):
+    user = User.objects.get(username__iexact=username)
+    if user != request.user:
+        return redirect("developers:profile", username=username)
+    skill = get_object_or_404(Skill, title=skill_title)
+    form = SKillModelForm(instance=skill)
+
+    if request.method == "POST":
+        form = SKillModelForm(data=request.POST, instance=skill)
+        if form.is_valid():
+            form.save()
+            return redirect("developers:profile", username=request.user.username)
+
+    return render(
+        request=request,
+        template_name="developers/add_skill.html",
+        context={"form": form, "skill": skill},
+    )
+
+
+def delete_skill(request, username, skill):
+    pass
