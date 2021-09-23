@@ -60,13 +60,15 @@ def add_skill(request, username):
         return redirect("developers:profile", username=username)
 
     form = SKillModelForm()
-
+    skills = Skill.objects.filter(title__iexact=request.POST.get("title"))
     if request.method == "POST":
         form = SKillModelForm(request.POST or None)
         if form.is_valid():
-            form.save()
             profile = request.user.profile
-            skill = form.instance
+            if skills.exists():
+                skill = skills.first()
+            else:
+                skill = form.instance
             profile.skills.add(skill)
             return redirect("developers:profile", username=profile.user.username)
 
