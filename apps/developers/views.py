@@ -79,7 +79,7 @@ def add_skill(request, username):
 
 @login_required
 def edit_skill(request, username, skill_title):
-    user = User.objects.get(username__iexact=username)
+    user = get_object_or_404(User, username__iexact=username)
     if user != request.user:
         return redirect("developers:profile", username=username)
     skill = get_object_or_404(Skill, title=skill_title)
@@ -98,5 +98,14 @@ def edit_skill(request, username, skill_title):
     )
 
 
-def delete_skill(request, username, skill):
-    pass
+def delete_skill(request, username, skill_title):
+    user = get_object_or_404(User, username__iexact=username)
+    if user != request.user:
+        return redirect("developers:profile", username=username)
+    skill = get_object_or_404(Skill, title=skill_title)
+    if request.method == "POST":
+        profile = user.profile
+        profile.skills.remove(skill)
+        return redirect("developers:profile", username=request.user.username)
+
+    return render(request=request, template_name="developers/delete.html", context={"skill": skill})
