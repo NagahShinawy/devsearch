@@ -123,5 +123,9 @@ def delete_skill(request, username, slug):
     return render(
         request=request,
         template_name="developers/delete.html",
-        context={"skill": skill},
+        context={
+            "skill": skill,
+            "back": f"/developers/{request.user.username}/",
+            "action": f"/developers/{request.user.username}/delete_skill/{slug}/",
+        },
     )
