@@ -5,9 +5,11 @@ from django.core.exceptions import ObjectDoesNotExist
 from django.http import HttpResponse
 from django.shortcuts import get_object_or_404, redirect, render
 
-from apps.core.constants.messages import (SkillAddedSuccessfully,
-                                          SkillDeletedSuccessfully,
-                                          SkillUpdatedSuccessfully)
+from apps.core.constants.messages import (
+    SkillAddedSuccessfully,
+    SkillDeletedSuccessfully,
+    SkillUpdatedSuccessfully,
+)
 
 from .forms import ProfileModelForm, SKillModelForm
 from .models import Profile, Skill
@@ -15,7 +17,37 @@ from .models import Profile, Skill
 
 def index(request):
     profiles = Profile.objects.all()
-    return render(request, "developers/profiles.html", {"profiles": profiles})
+    qs = []
+    query = request.GET.get("text")
+    if not query:
+        return render(
+            request,
+            template_name="developers/profiles.html",
+            context={"profiles": profiles},
+        )
+
+    by_name = Profile.objects.get_by_name(query)
+    by_short_intro = Profile.objects.get_by_short_intro(query)
+    by_location = Profile.objects.get_by_location(query)
+    by_boi = Profile.objects.get_by_boi(query)
+    by_skill = Profile.objects.get_by_skill(query)
+
+    if by_name:
+        qs.extend(by_name)
+
+    if by_short_intro:
+        qs.extend(by_short_intro)
+
+    if by_location:
+        qs.extend(by_location)
+
+    if by_boi:
+        qs.extend(by_boi)
+
+    if by_skill:
+        qs.extend(by_skill)
+
+    return render(request, "developers/profiles.html", {"profiles": qs})
 
 
 @login_required

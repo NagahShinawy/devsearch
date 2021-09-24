@@ -1,5 +1,7 @@
 from django.contrib.auth.models import User
 from django.db import models
+from .managers import DeveloperManager
+
 
 from apps.core.db.models import (
     ImageModelMixin,
@@ -38,6 +40,8 @@ class Profile(
     skills = models.ManyToManyField(
         Skill, related_name="profile", null=True, blank=True
     )
+
+    objects = DeveloperManager()
 
     def __str__(self):
         return self.user.username
