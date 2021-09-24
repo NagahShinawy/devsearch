@@ -8,7 +8,7 @@ fields_style = [
             "name": "username",
             "placeholder": "e.g. Dennis",
             "required": "required",
-        }
+        },
     },
     {
         "field_name": "first_name",

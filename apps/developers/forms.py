@@ -35,7 +35,6 @@ class ProfileModelForm(forms.ModelForm):
 
 
 class SKillModelForm(forms.ModelForm):
-
     class Meta:
         model = Skill
         fields = ("title", "description")

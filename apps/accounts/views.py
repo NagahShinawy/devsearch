@@ -2,8 +2,7 @@ from django.contrib import auth, messages
 from django.contrib.auth.models import User
 from django.shortcuts import redirect, render
 
-from apps.core.constants.messages import (AlreadyExistMessage,
-                                          InvalidCredentialsMessage)
+from apps.core.constants.messages import AlreadyExistMessage, InvalidCredentialsMessage
 
 from .forms import ProfileCreationForm
 
@@ -20,14 +19,16 @@ def signup(request):
             user.save()
             auth.login(request, user=form.instance)
             return redirect("developers:edit-profile")
-    return render(request=request, template_name="accounts/signup.html", context={"form": form})
+    return render(
+        request=request, template_name="accounts/signup.html", context={"form": form}
+    )
 
 
 def login(request):
     if request.user.is_authenticated:
         return redirect("developers:index")
 
-    if request.method != 'POST':
+    if request.method != "POST":
         return render(request=request, template_name="accounts/login.html")
     username = request.POST.get("username")
     password = request.POST.get("password")

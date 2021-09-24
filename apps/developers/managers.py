@@ -30,5 +30,6 @@ class DeveloperManager(models.Manager):
         return self.filter(boi__icontains=value)
 
     def get_by_skill(self, value):
-        return self.filter(Q(skills__title__icontains=value) | Q(skills__description__icontains=value))
-
+        return self.filter(
+            Q(skills__title__icontains=value) | Q(skills__description__icontains=value)
+        )

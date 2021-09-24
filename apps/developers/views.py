@@ -18,7 +18,6 @@ from .models import Profile, Skill
 
 def index(request):
     profiles = Profile.objects.all()
-    qs = []
     query = request.GET.get("text")
     if not query:
         return render(
@@ -27,16 +26,20 @@ def index(request):
             context={"profiles": profiles},
         )
 
-    profiles = Profile.objects.filter(
-        Q(user__username__icontains=query)
-        | Q(user__first_name__icontains=query)
-        | Q(user__last_name__icontains=query)
-        | Q(short_intro__icontains=query)
-        | Q(location__icontains=query)
-        | Q(boi__icontains=query)
-        | Q(skills__title__icontains=query)
-        | Q(skills__description__icontains=query)
-    ).order_by("user__username", "user__first_name", "user__last_name").distinct()
+    profiles = (
+        Profile.objects.filter(
+            Q(user__username__icontains=query)
+            | Q(user__first_name__icontains=query)
+            | Q(user__last_name__icontains=query)
+            | Q(short_intro__icontains=query)
+            | Q(location__icontains=query)
+            | Q(boi__icontains=query)
+            | Q(skills__title__icontains=query)
+            | Q(skills__description__icontains=query)
+        )
+        .order_by("user__username", "user__first_name", "user__last_name")
+        .distinct()
+    )
 
     return render(request, "developers/profiles.html", {"profiles": profiles})
 

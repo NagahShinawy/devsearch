@@ -6,13 +6,13 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('developers', '0007_alter_profile_skills'),
+        ("developers", "0007_alter_profile_skills"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='skill',
-            name='slug',
-            field=models.SlugField(blank=True, null=True, verbose_name='Slug'),
+            model_name="skill",
+            name="slug",
+            field=models.SlugField(blank=True, null=True, verbose_name="Slug"),
         ),
     ]

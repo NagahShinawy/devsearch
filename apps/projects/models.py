@@ -2,8 +2,13 @@ from django.db import models
 from django.utils.translation import gettext_lazy as _
 
 from apps.core import utils
-from apps.core.db.models import (ImageModelMixin, InfoMixin, SlugMixin,
-                                 TimestampMixin, UUIDMixin)
+from apps.core.db.models import (
+    ImageModelMixin,
+    InfoMixin,
+    SlugMixin,
+    TimestampMixin,
+    UUIDMixin,
+)
 from apps.developers.models import Profile
 from .managers import ProjectManager
 
@@ -17,7 +22,13 @@ class Project(UUIDMixin, InfoMixin, SlugMixin, TimestampMixin, ImageModelMixin):
     VOTES = "Votes"
     IMAGE_URL = "/static/images/default.jpg"
 
-    owner = models.ForeignKey(Profile, on_delete=models.CASCADE, related_name="projects", null=True, blank=True)
+    owner = models.ForeignKey(
+        Profile,
+        on_delete=models.CASCADE,
+        related_name="projects",
+        null=True,
+        blank=True,
+    )
     source_link = models.URLField(null=True, blank=True, verbose_name=_("Source Link"))
     demo_link = models.URLField(null=True, blank=True, verbose_name=_("Demo Link"))
     votes = models.IntegerField(default=0, verbose_name=_("Votes"))
