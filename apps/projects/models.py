@@ -5,6 +5,7 @@ from apps.core import utils
 from apps.core.db.models import (ImageModelMixin, InfoMixin, SlugMixin,
                                  TimestampMixin, UUIDMixin)
 from apps.developers.models import Profile
+from .managers import ProjectManager
 
 from .choices import VoteType
 
@@ -28,6 +29,8 @@ class Project(UUIDMixin, InfoMixin, SlugMixin, TimestampMixin, ImageModelMixin):
         verbose_name=_("Tags"),
         related_name="projects",
     )  # 'app_label.ModelName'
+
+    objects = ProjectManager()
 
     def __str__(self):
         return self.title
