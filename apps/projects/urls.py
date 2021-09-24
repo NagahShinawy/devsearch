@@ -1,7 +1,12 @@
 from django.urls import path
 
-from .views import (create_project, delete_project, list_projects,
-                    single_project, update_project)
+from .views import (
+    create_project,
+    delete_project,
+    list_projects,
+    single_project,
+    update_project,
+)
 
 app_name = "projects"
 

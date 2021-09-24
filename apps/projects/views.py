@@ -10,8 +10,32 @@ from .forms import ProjectModelForm
 
 def list_projects(request):
     projects = Project.objects.all()
+    qs = []
+    query = request.GET.get("text")
+    if not query:
+        return render(
+            request,
+            template_name="projects/projects.html",
+            context={"projects": projects},
+        )
+    by_title = Project.objects.get_by_title(title=query)
+    by_description = Project.objects.get_by_description(description=query)
+    by_developer = Project.objects.get_by_developer(dev=query)
+    by_tag = Project.objects.get_by_tag(tag=query)
+    if by_title:
+        qs.extend(by_title)
+
+    if by_description:
+        qs.extend(by_description)
+
+    if by_developer:
+        qs.extend(by_developer)
+
+    if by_tag:
+        qs.extend(by_tag)
+
     return render(
-        request, template_name="projects/projects.html", context={"projects": projects}
+        request, template_name="projects/projects.html", context={"projects": qs}
     )
 
 
