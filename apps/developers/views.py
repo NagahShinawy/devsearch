@@ -2,6 +2,7 @@ from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from django.core.exceptions import ObjectDoesNotExist
+from django.db.models import Q
 from django.http import HttpResponse
 from django.shortcuts import get_object_or_404, redirect, render
 
@@ -26,28 +27,18 @@ def index(request):
             context={"profiles": profiles},
         )
 
-    by_name = Profile.objects.get_by_name(query)
-    by_short_intro = Profile.objects.get_by_short_intro(query)
-    by_location = Profile.objects.get_by_location(query)
-    by_boi = Profile.objects.get_by_boi(query)
-    by_skill = Profile.objects.get_by_skill(query)
+    profiles = Profile.objects.filter(
+        Q(user__username__icontains=query)
+        | Q(user__first_name__icontains=query)
+        | Q(user__last_name__icontains=query)
+        | Q(short_intro__icontains=query)
+        | Q(location__icontains=query)
+        | Q(boi__icontains=query)
+        | Q(skills__title__icontains=query)
+        | Q(skills__description__icontains=query)
+    ).order_by("user__username", "user__first_name", "user__last_name").distinct()
 
-    if by_name:
-        qs.extend(by_name)
-
-    if by_short_intro:
-        qs.extend(by_short_intro)
-
-    if by_location:
-        qs.extend(by_location)
-
-    if by_boi:
-        qs.extend(by_boi)
-
-    if by_skill:
-        qs.extend(by_skill)
-
-    return render(request, "developers/profiles.html", {"profiles": qs})
+    return render(request, "developers/profiles.html", {"profiles": profiles})
 
 
 @login_required
