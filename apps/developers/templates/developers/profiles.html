@@ -18,7 +18,7 @@
           <form class="form" action="." method="get">
             <div class="form__field">
               <label for="formInput#search">Search Developers </label>
-              <input class="input input--text" id="formInput#search" type="text" name="text"
+              <input class="input input--text" id="formInput#search" type="text" name="text" value="{{ request.GET.text }}"
                 placeholder="Search by developer name" />
             </div>
 
